@@ -579,10 +579,10 @@ body {
 	top: 50%;
 	left: 465px;
 	width: 200px;
-	padding-right: 35px;
+	padding-left: 35px;
 	font-family: 'Monstrrr-Serif';
 	color: #fff;
-	background: url(../images/arrow.svg) no-repeat right 4px;
+	background: url(../images/arrow.svg) no-repeat left 4px;
 	font-size: 30px;
 	-webkit-transform: translateZ(50px);
 	-moz-transform: translateZ(50px);
@@ -696,6 +696,10 @@ footer .nclud {
 	margin: 36px 25px 0 0;
 }
 
+.warning {
+	display: none;
+}
+
 
 
 
@@ -711,39 +715,43 @@ footer .nclud {
 
 ****************************/
 
-.no3d .scene, 
-.no3d .book,
-.no3d .spreads,
-.no3d .spreads li,
-.no3d .page-left,
-.no3d .page-right,
-.no3d .popup {
+.no3d .scene {
+	width: 100%;
+	height: 600px;
+	background: url(../images/dumb-monster.png) no-repeat center bottom;
 	-webkit-transform: none;
 	-moz-transform: none;
 	transform: none;
 }
 
-.no3d .drag-notice {
+.no3d .book {
 	display: none;
 }
 
-.no3d .cover,
-.no3d .location,
-.no3d .music,
-.no3d .back {
-	display: none;
+.no3d footer {
+	position: absolute;
+	top: 600px;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 100%;
+	min-width: 940px;
+	background: #000;
 }
 
-.no3d .page-left,
-.no3d .page-right {
-	height: 500px;
-}
-
-.no3d .popup {
+.no3d .warning {
 	display: block;
-	margin-top: 0;
+	height: 40px;
+	background: #fff;
+	font-family: 'Monstrrr-Serif';
+	color: #000;
+	line-height: 38px;
+	text-align: center;
 }
 
+.no3d .beercamp-title {
+	margin: 20px 0 6px 0;
+}
 
 
 
@@ -764,6 +772,20 @@ footer .nclud {
 	
 	footer .details {
 		margin-left: 20px;
+	}
+	
+	.beercamp-title {
+		font-size: 16px;
+		letter-spacing: 1px;
+	}
+	
+	footer .dets {
+		font-family: 'Monstrrr-Serif';
+		font-size: 12px;
+	}
+	
+	footer .dets li {
+		margin-right: 10px;
 	}
 }
 
