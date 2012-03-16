@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1200px" height="500px"
+	 viewBox="0 0 1200 500" enable-background="new 0 0 1200 500" xml:space="preserve">
+<metadata>
+	<sfw  xmlns="&ns_sfw;">
+		<slices></slices>
+		<sliceSourceBounds  x="0" y="-7942" width="1200" height="16383" bottomLeftOrigin="true"></sliceSourceBounds>
+	</sfw>
+</metadata>
+
+
+<defs>
+	<clipPath id="left-mug-clip">
+		<path fill="#000" d="M323.094,160.966c2.36,5.495,49.125,222.476,38.762,241.058
+		c-10.362,18.581-154.074,57.117-167.398,31.076c-13.324-26.042-33.052-239.278-30.678-245.243
+		C166.157,181.892,319.503,152.625,323.094,160.966z"/>
+	</clipPath>	
+	<clipPath id="right-mug-clip">
+		<path fill="#000" d="M821.421,152.167c-0.41,6.078,28.099,230.377,44.345,244.723
+		c16.244,14.345,167.362,2.73,171.35-26.8s-49.228-241.08-53.528-246.007C979.284,119.156,822.047,142.938,821.421,152.167z"/>
+	</clipPath>
+</defs>
+
+
+
+<g id="arms">
+
+
+	
+
+
+
+
+
+
+
+	<path fill="#BC1515" d="M995.131,178.508c-5.508-28.684,27.197-64.216,63.214-53.332c36.018,10.884,21.835,49.161,21.835,49.161
+		s94.583,79.918,72.829,107.747c-21.753,27.831-82.181,74.233-156.945,48.803C921.297,305.456,949.847,191.995,995.131,178.508z"/>
+	<radialGradient id="SVGID_6_" cx="1022.4629" cy="128.1509" r="45.1734" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FF1010"/>
+		<stop  offset="1" style="stop-color:#D10D0D"/>
+	</radialGradient>
+	<path fill="url(#SVGID_6_)" d="M1045.5,146c19.102,2.388,32.501-7.577,23.058-16.282c-2.847-1.791-6.22-3.335-10.213-4.542
+		c-35.156-10.625-67.151,22.976-63.537,51.265C1005.486,168.154,1026.143,143.58,1045.5,146z"/>
+	<path opacity="0.5" fill="#E8E8E8" d="M1064.622,141.085c-6.222,1.56-40.032,18.085-51.39,23.68
+		c-8.352-29.959-14.764-51.688-16.708-55.699c-6.973-14.379-190.153,20.889-195.182,36.442
+		c-5.026,15.554,30.915,266.991,37.2,286.622c6.285,19.632,240.127-0.947,234.734-33.762c-1.09-6.627-4.586-21.796-9.528-41.897
+		c19.316-5.748,69.638-22.931,72.636-46.742C1140.099,280.222,1072.125,139.205,1064.622,141.085z M1054.913,321.282
+		c-10.572-41.438-23.893-91.74-35.2-133.045c8.762-2.661,32.678-9.515,39.449-7.196c8.34,2.855,45.607,106.821,46.15,120.825
+		C1105.711,312.127,1072.627,318.57,1054.913,321.282z"/>
+	
+		<linearGradient id="SVGID_7_" gradientUnits="userSpaceOnUse" x1="849.3838" y1="181.1094" x2="1016.5463" y2="367.433" gradientTransform="matrix(0.9977 0.0676 -0.0676 0.9977 20.8423 -65.3375)">
+		<stop  offset="0" style="stop-color:#FBBD46"/>
+		<stop  offset="1" style="stop-color:#EBA41C"/>
+	</linearGradient>
+	<path id="right-mug-fill" opacity=".85" fill="url(#SVGID_7_)" d="M821.421,152.167c-0.41,6.078,28.099,230.377,44.345,244.723
+		c16.244,14.345,167.362,2.73,171.35-26.8s-49.228-241.08-53.528-246.007C979.284,119.156,822.047,142.938,821.421,152.167z"/>
+	<linearGradient id="SVGID_8_" gradientUnits="userSpaceOnUse" x1="951.2188" y1="405.6914" x2="950.2188" y2="359.6914">
+		<stop  offset="0" style="stop-color:#D19725"/>
+		<stop  offset="1" style="stop-color:#D19725;stop-opacity:0.21"/>
+	</linearGradient>
+	<path fill="url(#SVGID_8_)" d="M960,368c-50.817,6.255-87.278,19.461-95.381,27.562c0.389,0.551,0.771,0.996,1.146,1.328
+		c16.015,14.143,163.117,3.052,171.085-25.562C1030.738,365.113,1005.353,362.418,960,368z"/>
+	
+	
+		<radialGradient id="SVGID_9_" cx="1029.9297" cy="152.8892" r="90.4083" gradientTransform="matrix(0.9888 0.067 -0.067 0.9888 30.8892 -60.6704)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FF1010"/>
+		<stop  offset="1" style="stop-color:#D10D0D"/>
+	</radialGradient>
+	<path fill="url(#SVGID_9_)" d="M1049.031,243.086c-12.212-5.463-20.459-20.592-20.349-41.775
+		c0.112-21.184,40.433-48.726,74.396-47.277c39.62,1.691,36.32,65.043,22.931,72.083
+		C1112.617,233.156,1061.244,248.55,1049.031,243.086z"/>
+	<path fill="#BC1515" d="M1049.031,243.086c12.213,5.464,63.586-9.93,76.978-16.97c11.142-5.858,15.292-50.708-6.461-66.573
+		c10.257,11.082,4.324,39.797-4.283,44.322c-8.929,4.693-43.487,16.259-54.659,24.774c-10.941,8.338-25.87-36.943-24.204-44.882
+		c-4.825,5.858-7.688,11.93-7.719,17.554C1028.572,222.494,1036.819,237.623,1049.031,243.086z"/>
+	
+		<radialGradient id="SVGID_10_" cx="1066.6562" cy="223.4238" r="86.3253" gradientTransform="matrix(0.9888 0.067 -0.067 0.9888 30.8892 -60.6704)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FF1010"/>
+		<stop  offset="1" style="stop-color:#D10D0D"/>
+	</radialGradient>
+	<path fill="url(#SVGID_10_)" d="M1146.975,224.558c-16.498-18.165-84.586,2.215-93.518,31.411
+		c-4.172,13.635,9.979,38.425,18.191,44.279c8.211,5.854,52.554,6.4,66.479-3.775
+		C1164.256,277.383,1171.008,251.02,1146.975,224.558z"/>
+	<path fill="#BC1515" d="M1141.78,271.887c-16.85,14.091-56.367,20.684-64.054,16.853c-6.923-3.45-19.874-28.784-20.482-40.435
+		c-1.688,2.469-2.981,5.03-3.787,7.665c-4.172,13.635,9.979,38.425,18.191,44.279c8.211,5.854,52.554,6.4,66.479-3.775
+		c26.129-19.09,32.881-45.453,8.848-71.915C1146.975,224.558,1158.629,257.797,1141.78,271.887z"/>
+	
+	
+	
+	
+	
+	
+	
+	
+	<circle fill="#fff" opacity=".4" clip-path="url(#right-mug-clip)" cx="896" cy="381" r="5">
+		<animate attributeType="XML" attributeName="cx" from="890" to="881" begin="7s" dur="5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="381" to="100" begin="7s" dur="5s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".3" clip-path="url(#right-mug-clip)" cx="983" cy="347" r="5">
+		<animate attributeType="XML" attributeName="cx" from="983" to="977" dur="4.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="347" to="100" dur="4.5s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".2" clip-path="url(#right-mug-clip)" cx="906" cy="308" r="5">
+		<animate attributeType="XML" attributeName="cx" from="906" to="897" begin="1s" dur="4s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="308" to="100" begin="1s" dur="4s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".5" clip-path="url(#right-mug-clip)" cx="980" cy="219" r="5">
+		<animate attributeType="XML" attributeName="cx" from="980" to="971" begin=".5s" dur="3s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="219" to="100" begin=".5s" dur="3s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".4" clip-path="url(#right-mug-clip)" cx="858" cy="210" r="5">
+		<animate attributeType="XML" attributeName="cx" from="858" to="851" begin="7s" dur="3.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="210" to="100" begin="7s" dur="3.5s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".3" clip-path="url(#right-mug-clip)" cx="938" cy="157" r="5">
+		<animate attributeType="XML" attributeName="cx" from="938" to="930" begin="6s" dur="2s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="157" to="100" begin="6s" dur="2s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".2" clip-path="url(#right-mug-clip)" cx="969" cy="313" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="969" to="961" begin="4s" dur="6s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="313" to="100" begin="4s" dur="6s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".5" clip-path="url(#right-mug-clip)" cx="932" cy="339" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="932" to="926" begin="5s" dur="4s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="339" to="100" begin="5s" dur="4s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".4" clip-path="url(#right-mug-clip)" cx="953" cy="268" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="953" to="947" dur="3.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="268" to="100" dur="3.5s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".3" clip-path="url(#right-mug-clip)" cx="882" cy="246" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="882" to="879" begin="3.5s" dur="2s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="246" to="100" begin="3.5s" dur="2s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".2" clip-path="url(#right-mug-clip)" cx="948" cy="176" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="948" to="939" begin="3s" dur="1.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="176" to="100" begin="3s" dur="1.5s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".5" clip-path="url(#right-mug-clip)" cx="991" cy="294" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="991" to="986" begin=".5s" dur="3.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="294" to="100" begin=".5s" dur="3.5s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".4" clip-path="url(#right-mug-clip)" cx="943" cy="291" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="943" to="937" dur="2.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="291" to="100" dur="2.5s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".3" clip-path="url(#right-mug-clip)" cx="959" cy="224" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="959" to="951" dur="2s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="224" to="100" dur="2s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".2" clip-path="url(#right-mug-clip)" cx="873" cy="191" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="873" to="864" begin="2s" dur="2.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="191" to="100" begin="2s" dur="2.5s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".5" clip-path="url(#right-mug-clip)" cx="854" cy="290" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="854" to="847" begin="1.5s" dur="4s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="290" to="100" begin="1.5s" dur="4s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".4" clip-path="url(#right-mug-clip)" cx="1018" cy="348" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="1018" to="1007" begin="1s" dur="5.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="348" to="100" begin="1s" dur="5.5s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".3" clip-path="url(#right-mug-clip)" cx="999" cy="264" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="999" to="982" begin=".5s" dur="4.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="264" to="100" begin=".5s" dur="4.5s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".2" clip-path="url(#right-mug-clip)" cx="889" cy="350" r="3.125">
+		<animate attributeType="XML" attributeName="cx" from="889" to="875" dur="5.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="350" to="100" dur="5.5s" repeatCount="indefinite" />
+	</circle>
+	
+	
+	
+	
+	<path fill="#BC1515" d="M170.842,242.015c-4.256-28.355-46.128-50.587-75.926-28.762c-29.8,21.826-4.183,52.641-4.183,52.641
+		s-61.51,104.848-32.291,123.52c29.22,18.673,100.307,41.929,161.237-6.003C280.614,335.477,217.171,239.732,170.842,242.015z"/>
+	
+		<radialGradient id="SVGID_30_" cx="938.458" cy="38.355" r="45.1734" gradientTransform="matrix(-0.9259 0.3262 0.3262 0.9259 985.5386 -137.3098)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FF1010"/>
+		<stop  offset="1" style="stop-color:#D10D0D"/>
+	</radialGradient>
+	<path fill="url(#SVGID_30_)" d="M113.602,228.343c-16.908,8.442-32.565,3.586-26.661-7.555c2.051-2.587,4.67-5.117,7.975-7.536
+		c29.086-21.305,69.671-0.629,75.551,26.744C157.877,235.805,130.736,219.789,113.602,228.343z"/>
+	<path opacity="0.5" fill="#E8E8E8" d="M82.854,409.588c10.542,21.069,62.741,20.566,82.501,19.588
+		c1.98,20.224,3.691,35.409,4.843,41.901c5.711,32.142,228.942-25.075,228.358-45.303c-0.585-20.228-49.316-264.76-59.044-277.523
+		c-9.729-12.761-190.844,14.333-192.609,29.92c-0.492,4.349,0.659,26.56,2.697,57.024c-12.34-1.477-49.037-5.749-55.307-5.165
+		C86.733,230.737,69.79,383.479,82.854,409.588z M109.059,392.172c-4.064-13.144-3.469-121.563,3.323-126.927
+		c5.513-4.354,29.893-5.811,38.874-6.204c3.002,41.933,7.077,92.854,10.803,134.67C144.772,396.979,112.037,401.804,109.059,392.172
+		z"/>
+	
+		<linearGradient id="SVGID_31_" gradientUnits="userSpaceOnUse" x1="723.9238" y1="121.6499" x2="888.0264" y2="304.5629" gradientTransform="matrix(-0.9186 0.3953 0.3953 0.9186 914.6539 -206.5393)">
+		<stop  offset="0" style="stop-color:#FBBD46"/>
+		<stop  offset="1" style="stop-color:#EBA41C"/>
+	</linearGradient>
+	<path id="left-mug-fill" opacity=".85" fill="url(#SVGID_31_)" d="M323.094,160.966c2.36,5.495,49.125,222.476,38.762,241.058
+		c-10.362,18.581-154.074,57.117-167.398,31.076c-13.324-26.042-33.052-239.278-30.678-245.243
+		C166.157,181.892,319.503,152.625,323.094,160.966z"/>
+	
+		<linearGradient id="SVGID_32_" gradientUnits="userSpaceOnUse" x1="828.3213" y1="333.623" x2="827.3396" y2="288.4657" gradientTransform="matrix(-0.9432 0.3323 0.3323 0.9432 956.0195 -151.8388)">
+		<stop  offset="0" style="stop-color:#D19725"/>
+		<stop  offset="1" style="stop-color:#D19725;stop-opacity:0.21"/>
+	</linearGradient>
+	<path fill="url(#SVGID_32_)" d="M265.178,406.01c49.094-10.783,87.161-10.447,97.306-5.588c-0.18,0.635-0.388,1.171-0.628,1.602
+		c-10.216,18.319-150.039,56.031-166.75,32.136C198.739,426.41,221.364,415.635,265.178,406.01z"/>
+	
+	
+		<radialGradient id="SVGID_33_" cx="939.2383" cy="68.2246" r="90.4087" gradientTransform="matrix(-0.8937 0.3846 0.3846 0.8937 937.1475 -183.4111)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FF1010"/>
+		<stop  offset="1" style="stop-color:#D10D0D"/>
+	</radialGradient>
+	<path fill="url(#SVGID_33_)" d="M141.999,319.391c9.526-9.043,12.227-25.741,5.215-45.318c-7.013-19.578-53.33-31.929-84.305-19.51
+		c-36.133,14.489-12.415,72.071,2.279,74.223C79.884,330.936,132.473,328.434,141.999,319.391z"/>
+	<path fill="#BC1515" d="M141.999,319.391c-9.526,9.043-62.115,11.545-76.81,9.395c-12.227-1.789-30.699-41.964-15.732-63.75
+		c-5.882,13.606,8.977,38.262,18.422,39.644c9.799,1.433,45.569,0.869,58.691,5.11c12.851,4.151,11.904-42.646,7.772-49.453
+		c6.378,3.851,11.009,8.539,12.872,13.736C154.226,293.649,151.524,310.348,141.999,319.391z"/>
+	
+		<radialGradient id="SVGID_34_" cx="975.9648" cy="138.7607" r="86.3255" gradientTransform="matrix(-0.8937 0.3846 0.3846 0.8937 937.1475 -183.4111)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FF1010"/>
+		<stop  offset="1" style="stop-color:#D10D0D"/>
+	</radialGradient>
+	<path fill="url(#SVGID_34_)" d="M45.267,334.182c9.351-22.202,79.043-25.539,96.836-1.42c8.31,11.265,3.293,38.832-2.401,46.933
+		c-5.693,8.099-46.573,23.067-62.786,18.188C46.496,388.729,31.646,366.521,45.267,334.182z"/>
+	<path fill="#BC1515" d="M65.515,376.31c20.198,7.551,58.937,0.765,64.805-5.289c5.285-5.452,9.013-33.134,5.776-44.12
+		c2.367,1.736,4.401,3.685,6.007,5.861c8.31,11.265,3.293,38.832-2.401,46.933c-5.693,8.099-46.573,23.067-62.786,18.188
+		c-30.42-9.154-45.271-31.362-31.649-63.701C45.267,334.182,45.318,368.759,65.515,376.31z"/>
+
+
+
+
+
+
+	<circle fill="#fff" opacity=".5" clip-path="url(#left-mug-clip)" cx="328.678" cy="397.172" r="4.909">
+		<animate attributeType="XML" attributeName="cx" from="329" to="307" begin="1s" dur="6s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="398" to="150" begin="1s" dur="6s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".2" clip-path="url(#left-mug-clip)" cx="237.032" cy="394.069" r="4.909">
+		<animate attributeType="XML" attributeName="cx" from="237" to="225" dur="4s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="395" to="150" dur="4s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".5" clip-path="url(#left-mug-clip)" cx="295.607" cy="332.843" r="4.909">
+		<animate attributeType="XML" attributeName="cx" from="296" to="285" dur="6s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="333" to="150" dur="6s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".2" clip-path="url(#left-mug-clip)" cx="198.061" cy="274.572" r="4.909">
+		<animate attributeType="XML" attributeName="cx" from="198" to="181" begin="1.5s" dur="3.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="275" to="150" begin="1.5s" dur="3.5s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".5" clip-path="url(#left-mug-clip)" cx="308.086" cy="226.446" r="4.909">
+		<animate attributeType="XML" attributeName="cx" from="308" to="296" begin="4s" dur="1.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="227" to="150" begin="4s" dur="1.5s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".3" clip-path="url(#left-mug-clip)" cx="216.726" cy="203.465" r="4.909">
+		<animate attributeType="XML" attributeName="cx" from="216" to="200" begin="2.5s" dur="1.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="204" to="150" begin="2.5s" dur="1.5s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".3" clip-path="url(#left-mug-clip)" cx="238.905" cy="358.021" r="3.068">
+		<animate attributeType="XML" attributeName="cx" from="240" to="222" begin="1s" dur="6s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="360" to="150" begin="1s" dur="6s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".5" clip-path="url(#left-mug-clip)" cx="281.645" cy="370.026" r="3.068">
+		<animate attributeType="XML" attributeName="cx" from="282" to="270" dur="5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="370" to="150" dur="5s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".5" clip-path="url(#left-mug-clip)" cx="239.043" cy="311.135" r="3.068">
+		<animate attributeType="XML" attributeName="cx" from="240" to="220" dur="4.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="311" to="150" dur="4.5s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".3" clip-path="url(#left-mug-clip)" cx="297.607" cy="267.607" r="3.068">
+		<animate attributeType="XML" attributeName="cx" from="298" to="280" dur="3s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="267" to="150" dur="3s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".5" clip-path="url(#left-mug-clip)" cx="213.664" cy="224.32" r="3.068">
+		<animate attributeType="XML" attributeName="cx" from="214" to="200" begin="2s" dur="2.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="225" to="150" begin="2s" dur="2.5s" repeatCount="indefinite" />
+	</circle>
+		
+	<circle fill="#fff" opacity=".4" clip-path="url(#left-mug-clip)" cx="212.338" cy="347.604" r="3.068">
+		<animate attributeType="XML" attributeName="cx" from="212" to="200" begin="2.2s" dur="6s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="348" to="150" begin="2.2s" dur="6s" repeatCount="indefinite" />
+	</circle>
+	<circle fill="#fff" opacity=".5" clip-path="url(#left-mug-clip)" cx="255.804" cy="329.17" r="3.067">
+		<animate attributeType="XML" attributeName="cx" from="256" to="245" begin="1s" dur="6s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="329" to="150" begin="1s" dur="6s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".2" clip-path="url(#left-mug-clip)" cx="219.135" cy="272.352" r="3.068">
+		<animate attributeType="XML" attributeName="cx" from="220" to="185" begin="5s" dur="5.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="273" to="150" begin="5s" dur="5.5s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".5" clip-path="url(#left-mug-clip)" cx="288" cy="213.746" r="3.067">
+		<animate attributeType="XML" attributeName="cx" from="288" to="265" dur="2.5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="214" to="150" dur="2.5s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".4" clip-path="url(#left-mug-clip)" cx="337.884" cy="299.215" r="3.068">
+		<animate attributeType="XML" attributeName="cx" from="338" to="325" begin=".5s" dur="3s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="300" to="150" begin=".5s" dur="3s" repeatCount="indefinite" />
+	</circle>
+	
+	<circle fill="#fff" opacity=".5" clip-path="url(#left-mug-clip)" cx="204.951" cy="406.41" r="3.068">
+		<animate attributeType="XML" attributeName="cx" from="205" to="196" begin="6s" dur="6s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="406" to="150" begin="6s" dur="6s" repeatCount="indefinite" />
+	</circle>	
+	
+	<circle fill="#fff" opacity=".3" clip-path="url(#left-mug-clip)" cx="195.145" cy="322.436" r="3.067">
+		<animate attributeType="XML" attributeName="cx" from="195" to="180" dur="7s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="322" to="150" dur="7s" repeatCount="indefinite" />
+	</circle>
+
+	<circle fill="#fff" opacity=".2" cx="325.047" cy="366.186" r="3.067" clip-path="url(#left-mug-clip)">
+		<animate attributeType="XML" attributeName="cx" from="325" to="300" dur="5s" repeatCount="indefinite" />
+		<animate attributeType="XML" attributeName="cy" from="366" to="150" dur="5s" repeatCount="indefinite" />
+	</circle>
+	
+	
+	
+	
+	
+	
+	
+	
+	<linearGradient id="SVGID_54_" gradientUnits="userSpaceOnUse" x1="863.9814" y1="292.8213" x2="932.5296" y2="286.3542" gradientTransform="matrix(1 -0.0099 0.0099 1 -2.6583 8.8399)">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+	</linearGradient>
+	<path opacity="0.38" fill="url(#SVGID_54_)" d="M953.823,424.422c-8.871-38.137-41.899-187.727-60.442-271.888
+		c-4.297,2.266-15.777,2.904-22.475-1.561c0,0-1.275,15.308-20.41,13.713c1.595,9.249-7.74,16.551-7.74,16.551l40.094,247.167
+		C882.85,428.404,907.897,432.21,953.823,424.422z"/>
+	<path fill="#FFFFFF" d="M992.208,81.333C984,61.998,958.125,66,958.125,66S931,53.333,913,64.667c-23-16.333-56.001,10-66.667,20
+		s-49.492-2.667-63.079,22S786,145,786,145s-12,17.333-1.333,29.667c7.703,8.906,19.749,7.794,27.997,3.048
+		c2.013,15.656,8.145,62.683,12.002,84.826c2.031,11.659-1.493,24.305-0.666,35.584c1.073,14.64,6.557,26.979,10.928,31.875
+		c7.739,8.667,21.442-3.486,11.947-35.875c-8.348-28.474-20.327-103.046-23.442-122.878c14.612,0.487,23.343-7.878,20.363-16.267
+		c9.129,2.646,21.538-5.646,21.204-15.333c3.333,5.979,29.667,6.687,34.334,0.354c11.667,2,18-6.333,18-6.333
+		s21,17.667,42.333,19.333S986,131,986,131s14.284,7.82,31.125-11.171S1009,75.667,992.208,81.333z"/>
+	<path fill="#F7ECDA" d="M1000.051,80.73c4.523,5.153,14.734,18.854,4.617,27.919C992,120,982.333,117.333,982.333,117.333
+		s-2.748,13-27.874,13.333S916,114,916,114s-1.665,19.505-19.666,18.086c-9.667,5.248-30.667-2.419-33.667-10.419
+		c-3.667,14.333-13,26.667-25,26c1.666,7-15.335,13.087-24.001,10.21c-7.753,5.697-27.157,7.329-31.05-6.372
+		c-2.51,6.174-4.486,15.604,2.051,23.162c7.703,8.906,19.749,7.794,27.997,3.048c0.051,0.396,0.106,0.825,0.162,1.26
+		c5.927-4.353,9.59-8.309,9.59-8.309S835.5,251.687,839.5,280.01c3.911,27.693,11.939,53.156-1.487,52.247
+		c7.685,3.098,17.185-9.742,8.862-38.132c-8.348-28.474-20.327-103.046-23.442-122.878c14.612,0.487,23.343-7.878,20.363-16.267
+		c9.129,2.646,21.538-5.646,21.204-15.333c3.333,5.979,29.667,6.687,34.334,0.354c11.667,2,18-6.333,18-6.333
+		s21,17.667,42.333,19.333S986,131,986,131s14.284,7.82,31.125-11.171C1031.47,103.652,1015.482,82.997,1000.051,80.73z"/>
+	
+	<linearGradient id="SVGID_55_" gradientUnits="userSpaceOnUse" x1="201.2432" y1="334.9834" x2="308.0835" y2="334.9834">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+	</linearGradient>
+	<path opacity="0.38" fill="url(#SVGID_55_)" d="M258.667,201.333c0,0-36.333,29.333-57.423,11.013
+		C209.404,283.604,230.197,464.788,231,468c1,4,80-12,77-19c-2.27-5.295-26.285-167.388-37.847-246.021
+		C264.667,203.667,258.667,201.333,258.667,201.333z"/>
+	<path fill="#FFFFFF" d="M169.9,205.41c-2.935,8.539-29.199,18.32-40.972,3.533c-11.772-14.789-1.645-35.455-1.645-35.455
+		s-12.447-3.306-10.838-13.755c1.608-10.449,12.266-11.747,12.266-11.747s-6.78-25.418,28.164-36.94
+		c34.942-11.522,66.7,10.483,96.328-6.054c29.628-16.538,60.795-7.659,55.462,6.341c23.668-8,40.001,3.333,36.291,13
+		c10.044,4.333,20.42,17.561,9.399,34.447s-62.548,6.083-62.548,6.083s-18.05,21.938-35.099,16.591
+		c-7.43,6.184-64.934,29.404-70.91-1.24C190.66,194.772,182.789,204.836,169.9,205.41z"/>
+	<g>
+		<path fill="#F7ECDA" d="M344.956,124.333c1.068-2.782,0.468-5.7-1.481-8.257c0.648,4.241-1.589,8.73-6.188,11.324
+			c1.893-0.854,4.935-2.096,8.104-2.867C345.247,124.467,345.102,124.396,344.956,124.333z"/>
+		<path fill="#F7ECDA" d="M127.284,173.487c0,0-10.127,20.667,1.645,35.455c11.772,14.788,38.037,5.006,40.972-3.533
+			c11.944-0.532,19.57-9.216,16.756-22.072c9.24,25.846,62.892,4.075,70.051-1.884c17.049,5.347,35.099-16.591,35.099-16.591
+			s51.527,10.804,62.548-6.083c6.57-10.066,5.535-18.831,1.5-25.188c2.176,7.954-11.909,16.973-28.855,15.741
+			C308.667,148,290.333,143,290.333,143s-15.549,35.952-34.267,27.085c-11.625,10.639-66.733,1.248-70.733-5.419
+			c-5,10-19.333,32.667-38.333,29S129.667,170,129.667,170s-13.215-7.691-9.531-17.752c-1.727,1.728-3.175,4.134-3.69,7.484
+			C114.837,170.181,127.284,173.487,127.284,173.487z"/>
+		<path fill="#F7ECDA" d="M337.288,127.4c-1.212,0.546-1.954,0.933-1.954,0.933C336.028,128.061,336.676,127.745,337.288,127.4z"/>
+		<path fill="#F7ECDA" d="M300.667,117.333c3.93-2.947,7.855-5.301,11.663-7.093c-1.202,0.317-2.42,0.672-3.664,1.093
+			c1.914-5.023-0.888-9.377-6.615-12.145C303.255,102.048,306.547,111.454,300.667,117.333z"/>
+	</g>
+	
+	
+	
+	
+	
+</g>
+</svg>

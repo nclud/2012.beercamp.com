@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1200px" height="500px" viewBox="0 0 1200 500" enable-background="new 0 0 1200 500" xml:space="preserve">
+<g id="back_buildings">
+	<path fill="#12141E" d="M1150,446l2-92h-118v78l-9,2l-4-101h-19l-7-46v46l-48,2l3,89h-7v-55l-104,1v10l-9,2l-3-86l-119,3l7,68
+		l-11,2l-1-40l-70,3l4,71l-6-2l1-11l-202,10l2,25h-12l5-104l-108-2l6,105l-15,5l-3-59L78,388l2,8H67l-3-36L0,372v128h1200v-55
+		L1150,446z M410,372l-11-2v-16l12-1L410,372z M606,409l-10,1l-1-11h11V409z M621,406h-8v-9h8V406z M641,367v-10l32-2l2,10L641,367z
+		 M722,331l-1-15l11-1l1,15L722,331z M740,314h11l2,18l-12-2L740,314z M744,354l-2-15h11l2,15H744z M929,409l-6-2l-2-16l9,2L929,409
+		z M993,396l-6,5l-1-15h7V396z M1009,356l-1-12l6,1l2,11H1009z M1104,392l-3-16h11l3,15L1104,392z M1122,392l-1-17l11,4l2,13H1122z"
+		/>
+</g>
+<g id="monster_back_body">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="804.3252" y1="-156.2676" x2="913.4329" y2="-351.1694" gradientTransform="matrix(1 0 0 -1 -256 155)">
+		<stop  offset="0" style="stop-color:#9424CF"/>
+		<stop  offset="1" style="stop-color:#8320B7"/>
+	</linearGradient>
+	<path fill="url(#SVGID_1_)" d="M541.5,497.5l95.553-100.429c0,0,80.829,67.08,111.905,65.278
+		c31.229-1.81,52.747,18.769,28.909-29.842c-47.56-96.984-105.378-150.14-151.072-148.274s-157.6,95.119-179.98,119.365
+		S541.5,497.5,541.5,497.5z"/>
+	<g>
+		<g>
+			<path fill="#6D19A3" d="M731.24,428.777c-67.144-19.583-74.604-61.548-91.777-68.052c-17.174-6.503-45.307,32.615-111.517,55.929
+				c-47.137,16.598-51.167,47.371-37.446,56.846c5.014,2.47,16.415,5.872,21,8c6.91,0.509,11.871,15.105,30,16l95.553-100.429
+				c0,0,54.123,44.912,90.819,60.247C749.939,448.554,762.448,437.88,731.24,428.777z"/>
+		</g>
+	</g>
+</g>
+</svg>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1200px" height="500px"
+	 viewBox="0 0 1200 500" enable-background="new 0 0 1200 500" xml:space="preserve">
+<metadata>
+	<sfw  xmlns="&ns_sfw;">
+		<slices></slices>
+		<sliceSourceBounds  height="500" width="1200" x="0" y="0" bottomLeftOrigin="true"></sliceSourceBounds>
+	</sfw>
+</metadata>
+<g id="bg" display="none">
+	<rect display="inline" fill="#3E495A" width="1200" height="500"/>
+</g>
+<g id="plane_1" display="none">
+	<path display="inline" fill="#231F20" d="M994.683,256.921c0,0,34.995-16.537,37.317-17.587
+		c22.299-10.089,59.279,17.726,77.796,66.737c18.517,49.013,8.436,89.188-14.129,94.93c-3.95,1.006-50.631,10.298-50.631,10.298
+		L994.683,256.921z"/>
+	<path display="inline" fill="#EC1C24" d="M627.389,428.844l102.879-48.279c0,0,25.732,14.436,82.732-11.564
+		s47.267-49.441,47.267-49.441s125.329-58.723,133.345-62.35C1014.085,247.945,1047,276,1064,321s7.745,83.723-12.973,88.995
+		c-20.717,5.271-351.476,68.544-351.476,68.544L627.389,428.844z"/>
+</g>
+<g id="cloud_1">
+	<path fill="#FFFFFF" d="M1040,500c13-13-3-59-53-47c-13-25-94-82-168-49c6-21-19-58-52-57s-46,28-46,41c-15-36-124-46-166-14
+		s-14,88-14,88s-76-29-73,38C577,500,1040,500,1040,500z"/>
+</g>
+</svg>
