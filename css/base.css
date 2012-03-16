@@ -361,13 +361,13 @@ body {
 }
 
 .cover .page-right {
-	background: url(../images/cover.svg) no-repeat -600px 0 #8DC63F;
+	background: url(../images/cover.svgz) no-repeat -600px 0 #8DC63F;
 	background-size: 1200px 600px;
 	-moz-transform-style: flat;
 }
 
 .back .page-left {
-	background: url(../images/cover.svg) no-repeat 0 0 #8DC63F;
+	background: url(../images/cover.svgz) no-repeat 0 0 #8DC63F;
 	background-size: 1200px 600px;
 	-moz-transform-style: flat;
 }
@@ -435,28 +435,27 @@ body {
 /*** Intro ***/
 
 .monster-body {	
-	background: url(../images/main-monster-2.svg);
-	
+	background: url(../images/main-monster-2.svgz);	
 }
 
 .horns {
-	background: url(../images/main-monster-horns-2.svg);
+	background: url(../images/main-monster-horns-2.svgz);
 }
 
 .eyes {
-	background: url(../images/main-monster-eyes-2.svg);
+	background: url(../images/main-monster-eyes-2.svgz);
 }
 
 .beers {
-	background: url(../images/main-monster-beers.svg);
+	background: url(../images/main-monster-beers.svgz);
 }
 
 .beercamp {
-	background: url(../images/beercamp-title.svg);
+	background: url(../images/beercamp-title.svgz);
 }
 
 .beercamp-date {
-	background: url(../images/beercamp-date.svg);
+	background: url(../images/beercamp-date.svgz);
 }
 
 
@@ -465,64 +464,28 @@ body {
 
 /*** Location ***/
 
-.purple-monster-body {
-	background: url(../images/purple-monster-body.svg);
-}
-
-.purple-monster-arm-prop {
-	background: url(../images/purple-monster-arm-prop.svg);
-}
-
-.purple-monster-arm-beer {
-	background: url(../images/purple-monster-arm-beer.svg);
-}
-
 .purple-monster-back-leg {
-	background: url(../images/purple-monster-back-leg.svg);
+	background: url(../images/purple-monster-back-leg.svgz);
 }
 
 .purple-monster-full {
-	background: url(../images/purple-monster-full.svg);
-}
-
-.buildings-back {
-	background: url(../images/buildings-back.svg);
-}
-
-.building-1a {
-	background: url(../images/building-1a.svg);
-}
-
-.building-1b {
-	background: url(../images/building-1b.svg);
-}
-
-.building-1c {
-	background: url(../images/building-1c.svg);
+	background: url(../images/purple-monster-full.svgz);
 }
 
 .building-1-full {
-	background: url(../images/building-1-full.svg);
+	background: url(../images/building-1-full.svgz);
 }
 
 .building-2 {
-	background: url(../images/building-2.svg);
-}
-
-.buildings-flat-2 {
-	background: url(../images/buildings-flat-2.svg);
-}
-
-.building-4 {
-	background: url(../images/building-4.svg);
+	background: url(../images/building-2.svgz);
 }
 
 .poland-title {
-	background: url(../images/poland-title.svg);
+	background: url(../images/poland-title.svgz);
 }
 
 .warsaw-title {
-	background: url(../images/warsaw-title.svg);
+	background: url(../images/warsaw-title.svgz);
 }
 
 
@@ -531,43 +494,31 @@ body {
 /*** Music ***/
 
 .crowd {
-	background: url(../images/crowd.svg);
-}
-
-.dj-table {
-	background: url(../images/dj-table.svg);
-}
-
-.dj-monster-body {
-	background: url(../images/dj-monster-body.svg);
-}
-
-.dj-monster-arms {
-	background: url(../images/dj-monster-arms.svg);
+	background: url(../images/crowd.svgz);
 }
 
 .dj-monster-helmet {
-	background: url(../images/dj-monster-helmet.svg);
+	background: url(../images/dj-monster-helmet.svgz);
 }
 
 .dj-monster-full {
-	background: url(../images/dj-monster-full.svg);
+	background: url(../images/dj-monster-full.svgz);
 }
 
 .dj-lightshow {
-	background: url(../images/dj-lightshow.svg);
+	background: url(../images/dj-lightshow.svgz);
 }
 
 .dj-wookie {
-	background: url(../images/dj-wookie.svg);
+	background: url(../images/dj-wookie.svgz);
 }
 
 .marne {
-	background: url(../images/marne.svg);
+	background: url(../images/marne.svgz);
 }
 
 .limboski {
-	background: url(../images/limboski.svg);
+	background: url(../images/limboski.svgz);
 }
 
 
