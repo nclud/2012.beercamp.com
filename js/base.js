@@ -164,9 +164,9 @@ function updateDrag(e) {
 		$rightPage.find('.page-left').css({
 			'-webkit-transform': 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)',
 			'-moz-transform': 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)',
-			'transform': 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)',
+			'transform': 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)'
 		});
-				
+
 		paperFolding.per = adjustedPer < 0 ? absPer : 1 - absPer;
 		if($leftPage[0]) {
 			$leftPage[0].dispatchEvent(paperFolding);
@@ -210,11 +210,11 @@ function updateDrag(e) {
 		var tarZ = 5 * Math.sin(degToRad(offsetAngle * anglePerPage + 10));
 		
 		$(this).css({
-			'-webkit-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * .5) + 'deg)',
-			'-moz-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * .5) + 'deg)',
-			'transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * .5) + 'deg)'
+			'-webkit-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)',
+			'-moz-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)',
+			'transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)'
 		});
-	});	
+	});
 	
 	if(curPageIndex == 0) {
 		$book.css({
@@ -281,7 +281,7 @@ function toggleVisibles(per, leftIndex) {
 		toTurn1.find('.hotspot').show();
 	}
 	
-	if(per < .5) {
+	if(per < 0.5) {
 		toTurn2.find('.popup').hide();
 		toTurn2.find('.hotspot').hide();
 	} else {
@@ -345,7 +345,7 @@ function zoomToHotspot(e) {
 				'transition': 'none'
 			});
 			$scene.unbind('webkitTransitionEnd');
-			$scene.unbind('transitionend');			
+			$scene.unbind('transitionend');
 			if(hasOrientation) {
 				window.addEventListener('deviceorientation', rotateScene, false);
 			} else {
@@ -391,23 +391,23 @@ function zoomToHotspot(e) {
 		switch(section) {
 			case 'intro':
 				$scene.css({
-					'-webkit-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'-moz-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'transform': 'scale3d(' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)'
+					'-webkit-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
+					'-moz-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
+					'transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)'
 				});
 				break;
 			case 'location':
 				$scene.css({
-					'-webkit-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ') translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'-moz-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ') translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'transform': 'scale3d(' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ') translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)'
+					'-webkit-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
+					'-moz-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
+					'transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)'
 				});
 				break;
 			case 'music':
 				$scene.css({
-					'-webkit-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ') translateY(-200px) translateX(315px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'-moz-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'transform': 'scale3d(' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ', ' + (1 - ((1 - curSceneScale) * .3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)'
+					'-webkit-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(315px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
+					'-moz-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
+					'transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)'
 				});
 				break;
 		}
@@ -432,8 +432,8 @@ function zoomToHotspot(e) {
 ****************************/
 
 
-function rotateScene(e) {	
-	var theta = (Math.abs(window.orientation) == 90) ? e.beta : e.gamma;	
+function rotateScene(e) {
+	var theta = (Math.abs(window.orientation) == 90) ? e.beta : e.gamma;
 	curRotY = hasOrientation ? 0 + (15 * (theta / -45)) : -15 + (30 * e.pageX / $body.width());
 	curRotX = -15;
 	adjustScene();
@@ -522,9 +522,9 @@ function craftThatPaperBaby() {
 		var tarX = 5 * Math.cos(degToRad(offsetAngle * anglePerPage + 10));
 		var tarZ = 5 * Math.sin(degToRad(offsetAngle * anglePerPage + 10));
 		$(this).css({
-			'-webkit-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * .5) + 'deg)',
-			'-moz-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * .5) + 'deg)',
-			'transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * .5) + 'deg)'
+			'-webkit-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)',
+			'-moz-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)',
+			'transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)'
 		});
 	});
 }
