@@ -28,6 +28,67 @@ var popups,
 
 
 
+/****************************
+
+	Main
+
+****************************/
+
+$(document).ready(function() {
+	paperFolding = document.createEvent('Event');
+	paperFolding.initEvent('pageFolding', true, true);
+
+	curPageIndex = 0;
+	curSceneScale = 1;
+	curRotX = -15;
+	curRotY = 0;
+	curPer = adjustedPer = 0;
+	zoomedIn = false;
+	curRotX = -15;
+	numTouches = 0;
+	bgColors = ['#3272ad', '#ae0039', '#50326d', '#355506', '#3272ad'];
+	$body = $('body');
+	$scene = $('.scene');
+	$book = $('.book');
+	hasTouch = Modernizr.touch;
+	has3d = Modernizr.csstransforms3d;
+
+	if(!has3d) {
+		$body.addClass('no3d');
+	} else {
+		craftThatPaperBaby();
+		if(hasTouch) {
+			if($body.width() <= 960) {
+				$body.css('padding-bottom', '80px');
+				setTimeout(function() {
+					window.scrollTo(0, 1);
+				}, 0);
+			}
+			$('.drag-notice').html('Touch and drag<br />to turn pages!');
+			$('.drag-notice').css({
+				'width': '220px'
+			});
+			$body.bind('touchstart', startDrag);
+			$(window).resize(resizeScene);
+			if(window.DeviceMotionEvent != undefined) {
+				hasOrientation = true;
+				window.addEventListener('deviceorientation', rotateScene, false);
+			}
+			$('.hotspot').bind('touchend', zoomToHotspot);
+		} else {
+			$scene.bind('mousedown', startDrag);
+			$(document).mousemove(rotateScene);
+			$(window).resize(resizeScene);
+			$('.hotspot').click(zoomToHotspot);
+		}
+		resizeScene();
+		adjustScene();
+	}
+});
+
+
+
+
 
 
 /****************************
@@ -467,62 +528,4 @@ function craftThatPaperBaby() {
 		});
 	});
 }
-
-$(document).ready(function() {
-	paperFolding = document.createEvent('Event');
-	paperFolding.initEvent('pageFolding', true, true);
-	
-	curPageIndex = 0;
-	curSceneScale = 1;
-	curRotX = -15;
-	curRotY = 0;
-	curPer = adjustedPer = 0;
-	zoomedIn = false;
-	curRotX = -15;
-	numTouches = 0;
-	bgColors = ['#3272ad', '#ae0039', '#50326d', '#355506', '#3272ad'];
-	$body = $('body');
-	$scene = $('.scene');
-	$book = $('.book');
-	hasTouch = Modernizr.touch;
-	has3d = Modernizr.csstransforms3d;
-	
-	if(!has3d) {
-		$body.addClass('no3d');
-	} else {
-		craftThatPaperBaby();
-		if(hasTouch) {
-			if($body.width() <= 960) {
-				$body.css('padding-bottom', '80px');
-				setTimeout(function() {
-					window.scrollTo(0, 1);
-				}, 0);
-			}
-			$('.drag-notice').html('Touch and drag<br />to turn pages!');
-			$('.drag-notice').css({
-				'width': '220px'
-			});
-			$body.bind('touchstart', startDrag);
-			$(window).resize(resizeScene);
-			if(window.DeviceMotionEvent != undefined) {
-				hasOrientation = true;
-				window.addEventListener('deviceorientation', rotateScene, false);
-			}
-			$('.hotspot').bind('touchend', zoomToHotspot);
-		} else {		
-			$scene.bind('mousedown', startDrag);
-			$(document).mousemove(rotateScene);
-			$(window).resize(resizeScene);
-			$('.hotspot').click(zoomToHotspot);
-		}
-		resizeScene();
-		adjustScene();
-	}
-});
-
-
-
-
-
-
 
