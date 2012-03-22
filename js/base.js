@@ -10,6 +10,8 @@ var popups,
 	curDir,
 	adjustedPer,
 	bgColors,
+	domTransformProperty,
+	cssTransformProperty,
 	$leftPage,
 	$rightPage,
 	$document = $(document),
@@ -51,6 +53,8 @@ $document.ready(function() {
 	zoomedIn = false;
 	curRotX = -15;
 	numTouches = 0;
+	domTransformProperty = Modernizr.prefixed('transform'),
+	cssTransformProperty = domToCss(domTransformProperty),
 	bgColors = ['#3272ad', '#ae0039', '#50326d', '#355506', '#3272ad'];
 	$body = $('body');
 	$scene = $('.scene');
@@ -167,17 +171,8 @@ function updateDrag(e) {
 		$rightPage = adjustedPer < 0 ? $pages.eq(curPageIndex + 1) : $pages.eq(curPageIndex);
 		rightTransform = 'rotateY(' + (-180 * (adjustedPer < 0 ? absPer : 1 - absPer)) + 'deg)';
 		leftTransform = 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)';
-		$leftPage.find('.page-right').css({
-			'-webkit-transform': rightTransform,
-			'-moz-transform': rightTransform,
-			'transform': rightTransform
-		});
-		
-		$rightPage.find('.page-left').css({
-			'-webkit-transform': leftTransform,
-			'-moz-transform': leftTransform,
-			'transform': leftTransform
-		});
+		$leftPage.find('.page-right').css(cssTransformProperty, rightTransform);
+		$rightPage.find('.page-left').css(cssTransformProperty, leftTransform);
 
 		paperFolding.per = adjustedPer < 0 ? absPer : 1 - absPer;
 		if($leftPage[0]) {
@@ -193,16 +188,8 @@ function updateDrag(e) {
 	} else {
 		rightTransform = 'rotateY(' + (-180 * (dir == 'right' ? absPer : 1 - absPer)) + 'deg)';
 		leftTransform = 'rotateY(' + (180 * (dir == 'right' ? 1 - absPer : absPer)) + 'deg)';
-		$leftPage.find('.page-right').css({
-			'-webkit-transform': rightTransform,
-			'-moz-transform': rightTransform,
-			'transform': rightTransform
-		});
-		$rightPage.find('.page-left').css({
-			'-webkit-transform': leftTransform,
-			'-moz-transform': leftTransform,
-			'transform': leftTransform
-		});
+		$leftPage.find('.page-right').css(cssTransformProperty, rightTransform);
+		$rightPage.find('.page-left').css(cssTransformProperty, leftTransform);
 		paperFolding.per = dir == 'right' ? absPer : 1 - absPer;
 		if($leftPage[0]) {
 			$leftPage[0].dispatchEvent(paperFolding);
@@ -224,11 +211,7 @@ function updateDrag(e) {
 		var tarX = 5 * Math.cos(rads);
 		var tarZ = 5 * Math.sin(rads);
 		var transform = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
-		$(this).css({
-			'-webkit-transform': transform,
-			'-moz-transform': transform,
-			'transform': transform
-		});
+		$(this).css(cssTransformProperty, transform);
 	});
 	
 	var bookTransform;
@@ -241,11 +224,7 @@ function updateDrag(e) {
 	} else if(curPageIndex == 4) {
 		bookTransform = 'translateX(' + (300 - (300 * adjustedPer)) + 'px) rotateX(' + (29 + (61 * adjustedPer)) + 'deg) rotateZ(' + (-8 + (8 * adjustedPer)) + 'deg) translateZ(' + (100 - (100 * adjustedPer)) + 'px) translateY(' + (-120 + (120 * adjustedPer)) + 'px)';
 	}
-	$book.css({
-		'-webkit-transform': bookTransform,
-		'-moz-transform': bookTransform,
-		'transform': bookTransform
-	});
+	$book.css(cssTransformProperty, bookTransform);
 
 	if(absPer >= 1) {
 		adjustedPer < 0 ? curPageIndex++ : curPageIndex--;
@@ -410,11 +389,7 @@ function zoomToHotspot(e) {
 				break;
 		}
 		sectionTransform = scaleTransform + ' ' + translateTransform;
-		$scene.css({
-			'-webkit-transform': sectionTransform,
-			'-moz-transform': sectionTransform,
-			'transform': sectionTransform
-		});
+		$scene.css(cssTransformProperty, sectionTransform);
 	}
 	
 	zoomedIn = !zoomedIn;
@@ -445,11 +420,7 @@ function rotateScene(e) {
 
 function adjustScene() {
 	var sceneTransform = 'scale3d(' + curSceneScale + ', ' + curSceneScale + ', ' + curSceneScale + ') translateY(100px) rotateX(' + curRotX + 'deg) rotateY(' + curRotY + 'deg)';
-	$scene.css({
-		'-webkit-transform': sceneTransform,
-		'-moz-transform': sceneTransform,
-		'transform': sceneTransform
-	});
+	$scene.css(cssTransformProperty, sceneTransform);
 }
 
 function resizeScene(e) {
@@ -496,7 +467,14 @@ function radToDeg(rad) {
 	return rad * 180 / Math.PI;
 }
 
+function domToCss(property) {
 
+	var css = property.replace(/([A-Z])/g, function (str, m1) {
+		return '-' + m1.toLowerCase();
+	}).replace(/^ms-/,'-ms-');
+
+	return css;
+}
 
 
 
@@ -530,11 +508,7 @@ function craftThatPaperBaby() {
 		var tarZ = 5 * Math.sin(rads);
 		var $page = $(this);
 		var pageTransform = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
-		$page.css({
-			'-webkit-transform': pageTransform,
-			'-moz-transform': pageTransform,
-			'transform': pageTransform
-		});
+		$page.css(cssTransformProperty, pageTransform);
 	});
 }
 
