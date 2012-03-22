@@ -23,8 +23,14 @@ var popups,
 	$dragNotice,
 	$hotSpots,
 	hasTouch,
+	hasMotion,
 	hasOrientation,
 	numTouches,
+	rotationEvent,
+	dragStartEvent,
+	dragMoveEvent,
+	dragStopEvent,
+	selectionEvent,
 	initialOrientation,
 	PAGE_TURN_SPEED = 25;
 
@@ -63,6 +69,13 @@ $document.ready(function() {
 	$dragNotice = $('.drag-notice');
 	$hotSpots = $('.hotspot');
 	hasTouch = Modernizr.touch;
+	hasMotion = Modernizr.devicemotion;
+	hasOrientation = Modernizr.deviceorientation;
+	rotationEvent = (hasTouch && hasOrientation) ? 'deviceorientation' : 'mousemove';
+	dragStartEvent = hasTouch ? 'touchstart' : 'mousedown';
+	dragMoveEvent = hasTouch ? 'touchmove' : 'mousemove';
+	dragStopEvent = hasTouch ? 'touchend' : 'mouseup';
+	selectionEvent = hasTouch ? 'touchend' : 'click';
 	has3d = Modernizr.csstransforms3d;
 
 	if(!has3d) {
@@ -80,19 +93,12 @@ $document.ready(function() {
 			$dragNotice.css({
 				'width': '220px'
 			});
-			$body.bind('touchstart', startDrag);
-			$window.resize(resizeScene);
-			if(window.DeviceMotionEvent != undefined) {
-				hasOrientation = true;
-				window.addEventListener('deviceorientation', rotateScene, false);
-			}
-			$hotSpots.bind('touchend', zoomToHotspot);
-		} else {
-			$scene.bind('mousedown', startDrag);
-			$document.mousemove(rotateScene);
-			$window.resize(resizeScene);
-			$hotSpots.click(zoomToHotspot);
 		}
+		$window.bind(rotationEvent, rotateScene);
+		$window.bind('resize', resizeScene);
+		$body.bind(dragStartEvent, startDrag);
+		$hotSpots.bind(selectionEvent, zoomToHotspot);
+
 		resizeScene();
 		adjustScene();
 	}
@@ -113,8 +119,8 @@ function startDrag(e) {
 	e.preventDefault();
 	$book.css('cursor', '-webkit-grabbing');
 	$scene.data('offset', hasTouch ? e.originalEvent.touches[0].pageX : e.pageX);
-	$body.bind(hasTouch ? 'touchmove' : 'mousemove', updateDrag);
-	$body.bind(hasTouch ? 'touchend' : 'mouseup', stopDrag);
+	$body.bind(dragMoveEvent, updateDrag);
+	$body.bind(dragStopEvent, stopDrag);
 }
 
 function updateDrag(e) {
@@ -236,8 +242,8 @@ function updateDrag(e) {
 function stopDrag(e) {
 	curDir = null;
 	curPer = adjustedPer;
-	$body.unbind(hasTouch ? 'touchmove' : 'mousemove');
-	$body.unbind(hasTouch ? 'touchend' : 'mouseup');
+	$body.unbind(dragMoveEvent);
+	$body.unbind(dragStopEvent);
 	$book.css('cursor', '-webkit-grab');
 }
 
@@ -303,8 +309,8 @@ function toggleVisibles(per, leftIndex) {
 function zoomToHotspot(e) {
 	e.preventDefault();
 	
-	$body.unbind('click');
-	$body.unbind('touchend');
+	$body.unbind(selectionEvent);
+	$window.unbind(rotationEvent);
 	var $spot = $(this);
 	var $focusedSpot = $hotSpots.filter('.focused');
 	var hotspot = $focusedSpot.length > 0 ? $focusedSpot : $spot;
@@ -318,11 +324,7 @@ function zoomToHotspot(e) {
 		
 		adjustScene();
 		
-		if(hasTouch) {
-			$body.bind('touchstart', startDrag);
-		} else {
-			$scene.bind('mousedown', startDrag);
-		}
+		$body.bind(dragStartEvent, startDrag);
 		
 		setTimeout(function(e) {
 			$scene.css({
@@ -332,11 +334,7 @@ function zoomToHotspot(e) {
 			});
 			$scene.unbind('webkitTransitionEnd');
 			$scene.unbind('transitionend');
-			if(hasOrientation) {
-				window.addEventListener('deviceorientation', rotateScene, false);
-			} else {
-				$document.mousemove(rotateScene);
-			}
+			$window.bind(rotationEvent, rotateScene);
 		}, 600);
 	} else {
 		hotspot.addClass('focused');
@@ -346,20 +344,10 @@ function zoomToHotspot(e) {
 			'margin-left': indicator.attr('data-offsetX') + 'px',
 			'margin-top': indicator.attr('data-offsetY') + 'px'
 		});
-				
-		if(hasTouch) {
-			$body.unbind('touchstart');
-		} else {
-			$scene.unbind('mousedown');
-		}
-				
-		if(hasOrientation) {
-			window.removeEventListener('deviceorientation', rotateScene);
-		} else {
-			$document.unbind('mousemove');
-		}
-		
-		$body.unbind(hasTouch ? 'touchmove' : 'mousemove');
+
+		$body.unbind(dragStartEvent);
+		$window.unbind(rotationEvent, rotateScene);
+		$body.unbind(dragMoveEvent);
 		
 		$scene.css({
 			'-webkit-transition': 'all .6s',
@@ -368,8 +356,7 @@ function zoomToHotspot(e) {
 		});
 		
 		setTimeout(function() {
-			$body.click('click', zoomToHotspot);
-			$body.bind('touchend', zoomToHotspot);
+			$body.bind(selectionEvent, zoomToHotspot);
 		}, 1);
 		
 		var section = $spot.parent().parent().attr('class');
@@ -412,9 +399,11 @@ function zoomToHotspot(e) {
 
 
 function rotateScene(e) {
-	var theta = (Math.abs(window.orientation) == 90) ? e.beta : e.gamma;
-	curRotY = hasOrientation ? 0 + (15 * (theta / -45)) : -15 + (30 * e.pageX / $body.width());
+	var o = e.originalEvent;
+	var theta = (Math.abs(window.orientation) == 90) ? o.beta : o.gamma;
+	curRotY = e.type === 'deviceorientation' ? 0 + (15 * (theta / -45)) : -15 + (30 * e.pageX / $body.width());
 	curRotX = -15;
+
 	adjustScene();
 }
 
