@@ -159,21 +159,24 @@ function updateDrag(e) {
 		$hotSpots.css('pointer-events', 'auto');
 		$hotSpots.find('.indicator').css('opacity', '1');
 	}
-	
+
+	var leftTransform;
+	var rightTransform;
 	if(!shouldBreak) {
 		$leftPage = adjustedPer < 0 ? $pages.eq( curPageIndex ) : $pages.eq( curPageIndex - 1 );
 		$rightPage = adjustedPer < 0 ? $pages.eq(curPageIndex + 1) : $pages.eq(curPageIndex);
-
+		rightTransform = 'rotateY(' + (-180 * (adjustedPer < 0 ? absPer : 1 - absPer)) + 'deg)';
+		leftTransform = 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)';
 		$leftPage.find('.page-right').css({
-			'-webkit-transform': 'rotateY(' + (-180 * (adjustedPer < 0 ? absPer : 1 - absPer)) + 'deg)',
-			'-moz-transform': 'rotateY(' + (-180 * (adjustedPer < 0 ? absPer : 1 - absPer)) + 'deg)',
-			'transform': 'rotateY(' + (-180 * (adjustedPer < 0 ? absPer : 1 - absPer)) + 'deg)'
+			'-webkit-transform': rightTransform,
+			'-moz-transform': rightTransform,
+			'transform': rightTransform
 		});
 		
 		$rightPage.find('.page-left').css({
-			'-webkit-transform': 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)',
-			'-moz-transform': 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)',
-			'transform': 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)'
+			'-webkit-transform': leftTransform,
+			'-moz-transform': leftTransform,
+			'transform': leftTransform
 		});
 
 		paperFolding.per = adjustedPer < 0 ? absPer : 1 - absPer;
@@ -188,15 +191,17 @@ function updateDrag(e) {
 		
 		toggleVisibles(absPer * 180, adjustedPer < 0 ? curPageIndex : curPageIndex - 1);
 	} else {
+		rightTransform = 'rotateY(' + (-180 * (dir == 'right' ? absPer : 1 - absPer)) + 'deg)';
+		leftTransform = 'rotateY(' + (180 * (dir == 'right' ? 1 - absPer : absPer)) + 'deg)';
 		$leftPage.find('.page-right').css({
-			'-webkit-transform': 'rotateY(' + (-180 * (dir == 'right' ? absPer : 1 - absPer)) + 'deg)',
-			'-moz-transform': 'rotateY(' + (-180 * (dir == 'right' ? absPer : 1 - absPer)) + 'deg)',
-			'transform': 'rotateY(' + (-180 * (dir == 'right' ? absPer : 1 - absPer)) + 'deg)'
+			'-webkit-transform': rightTransform,
+			'-moz-transform': rightTransform,
+			'transform': rightTransform
 		});
 		$rightPage.find('.page-left').css({
-			'-webkit-transform': 'rotateY(' + (180 * (dir == 'right' ? 1 - absPer : absPer)) + 'deg)',
-			'-moz-transform': 'rotateY(' + (180 * (dir == 'right' ? 1 - absPer : absPer)) + 'deg)',
-			'transform': 'rotateY(' + (180 * (dir == 'right' ? 1 - absPer : absPer)) + 'deg)'
+			'-webkit-transform': leftTransform,
+			'-moz-transform': leftTransform,
+			'transform': leftTransform
 		});
 		paperFolding.per = dir == 'right' ? absPer : 1 - absPer;
 		if($leftPage[0]) {
@@ -215,42 +220,33 @@ function updateDrag(e) {
 		var anglePerPage = 180 / 9;
 		var offsetIndex = adjustedPer < 0 ? 5 + curPageIndex - i : 5 + curPageIndex - i - 2;
 		var offsetAngle = adjustedPer < 0 ? offsetIndex - adjustedPer - 1 : offsetIndex - adjustedPer + 1;
-		var tarX = 5 * Math.cos(degToRad(offsetAngle * anglePerPage + 10));
-		var tarZ = 5 * Math.sin(degToRad(offsetAngle * anglePerPage + 10));
-		
+		var rads = degToRad(offsetAngle * anglePerPage + 10);
+		var tarX = 5 * Math.cos(rads);
+		var tarZ = 5 * Math.sin(rads);
+		var transform = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
 		$(this).css({
-			'-webkit-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)',
-			'-moz-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)',
-			'transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)'
+			'-webkit-transform': transform,
+			'-moz-transform': transform,
+			'transform': transform
 		});
 	});
 	
+	var bookTransform;
 	if(curPageIndex == 0) {
-		$book.css({
-			'-webkit-transform': 'translateX(' + (-300 + (300 * absPer)) + 'px) rotateX(' + (29 + (61 * absPer)) + 'deg) rotateZ(' + (-8 + (8 * absPer)) + 'deg) translateZ(' + (100 - (100 * absPer)) + 'px)',
-			'-moz-transform': 'translateX(' + (-300 + (300 * absPer)) + 'px) rotateX(' + (29 + (61 * absPer)) + 'deg) rotateZ(' + (-8 + (8 * absPer)) + 'deg) translateZ(' + (100 - (100 * absPer)) + 'px)',
-			'transform': 'translateX(' + (-300 + (300 * absPer)) + 'px) rotateX(' + (29 + (61 * absPer)) + 'deg) rotateZ(' + (-8 + (8 * absPer)) + 'deg) translateZ(' + (100 - (100 * absPer)) + 'px)'
-		});
+		bookTransform = 'translateX(' + (-300 + (300 * absPer)) + 'px) rotateX(' + (29 + (61 * absPer)) + 'deg) rotateZ(' + (-8 + (8 * absPer)) + 'deg) translateZ(' + (100 - (100 * absPer)) + 'px)';
 	} else if(curPageIndex == 1 && adjustedPer > 0) {
-		$book.css({
-			'-webkit-transform': 'translateX(' + (-300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px)',
-			'-moz-transform': 'translateX(' + (-300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px)',
-			'transform': 'translateX(' + (-300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px)'
-		});
+		bookTransform = 'translateX(' + (-300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px)';
 	} else if(curPageIndex == 3 && adjustedPer < 0) {
-		$book.css({
-			'-webkit-transform': 'translateX(' + (300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px) translateY(' + (-120 * absPer) + 'px)',
-			'-moz-transform': 'translateX(' + (300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px) translateY(' + (-120 * absPer) + 'px)',
-			'transform': 'translateX(' + (300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px) translateY(' + (-120 * absPer) + 'px)'
-		});
+		bookTransform = 'translateX(' + (300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px) translateY(' + (-120 * absPer) + 'px)';
 	} else if(curPageIndex == 4) {
-		$book.css({
-			'-webkit-transform': 'translateX(' + (300 - (300 * adjustedPer)) + 'px) rotateX(' + (29 + (61 * adjustedPer)) + 'deg) rotateZ(' + (-8 + (8 * adjustedPer)) + 'deg) translateZ(' + (100 - (100 * adjustedPer)) + 'px) translateY(' + (-120 + (120 * adjustedPer)) + 'px)',
-			'-moz-transform': 'translateX(' + (300 - (300 * adjustedPer)) + 'px) rotateX(' + (29 + (61 * adjustedPer)) + 'deg) rotateZ(' + (-8 + (8 * adjustedPer)) + 'deg) translateZ(' + (100 - (100 * adjustedPer)) + 'px) translateY(' + (-120 + (120 * adjustedPer)) + 'px)',
-			'transform': 'translateX(' + (300 - (300 * adjustedPer)) + 'px) rotateX(' + (29 + (61 * adjustedPer)) + 'deg) rotateZ(' + (-8 + (8 * adjustedPer)) + 'deg) translateZ(' + (100 - (100 * adjustedPer)) + 'px) translateY(' + (-120 + (120 * adjustedPer)) + 'px)'
-		});
+		bookTransform = 'translateX(' + (300 - (300 * adjustedPer)) + 'px) rotateX(' + (29 + (61 * adjustedPer)) + 'deg) rotateZ(' + (-8 + (8 * adjustedPer)) + 'deg) translateZ(' + (100 - (100 * adjustedPer)) + 'px) translateY(' + (-120 + (120 * adjustedPer)) + 'px)';
 	}
-	
+	$book.css({
+		'-webkit-transform': bookTransform,
+		'-moz-transform': bookTransform,
+		'transform': bookTransform
+	});
+
 	if(absPer >= 1) {
 		adjustedPer < 0 ? curPageIndex++ : curPageIndex--;
 		curPer = adjustedPer = 0;
@@ -398,30 +394,27 @@ function zoomToHotspot(e) {
 		}, 1);
 		
 		var section = $spot.parent().parent().attr('class');
-
+		var scale = (1 - ((1 - curSceneScale) * 0.3));
+		var scaleTransform = 'scale3d(' + scale + ', ' + scale + ', ' + scale + ')';
+		var translateTransform;
+		var sectionTransform;
 		switch(section) {
 			case 'intro':
-				$scene.css({
-					'-webkit-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'-moz-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)'
-				});
+				translateTransform = 'translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
 				break;
 			case 'location':
-				$scene.css({
-					'-webkit-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'-moz-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)'
-				});
+				translateTransform = 'translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
 				break;
 			case 'music':
-				$scene.css({
-					'-webkit-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(315px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'-moz-transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)',
-					'transform': 'scale3d(' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ', ' + (1 - ((1 - curSceneScale) * 0.3)) + ') translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)'
-				});
+				translateTransform = 'translateY(-200px) translateX(315px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
 				break;
 		}
+		sectionTransform = scaleTransform + ' ' + translateTransform;
+		$scene.css({
+			'-webkit-transform': sectionTransform,
+			'-moz-transform': sectionTransform,
+			'transform': sectionTransform
+		});
 	}
 	
 	zoomedIn = !zoomedIn;
@@ -451,10 +444,11 @@ function rotateScene(e) {
 }
 
 function adjustScene() {
+	var sceneTransform = 'scale3d(' + curSceneScale + ', ' + curSceneScale + ', ' + curSceneScale + ') translateY(100px) rotateX(' + curRotX + 'deg) rotateY(' + curRotY + 'deg)';
 	$scene.css({
-		'-webkit-transform': 'scale3d(' + curSceneScale + ', ' + curSceneScale + ', ' + curSceneScale + ') translateY(100px) rotateX(' + curRotX + 'deg) rotateY(' + curRotY + 'deg)',
-		'-moz-transform': 'scale3d(' + curSceneScale + ', ' + curSceneScale + ', ' + curSceneScale + ') translateY(100px) rotateX(' + curRotX + 'deg) rotateY(' + curRotY + 'deg)',
-		'transform': 'scale3d(' + curSceneScale + ', ' + curSceneScale + ', ' + curSceneScale + ') translateY(100px) rotateX(' + curRotX + 'deg) rotateY(' + curRotY + 'deg)'
+		'-webkit-transform': sceneTransform,
+		'-moz-transform': sceneTransform,
+		'transform': sceneTransform
 	});
 }
 
@@ -531,12 +525,15 @@ function craftThatPaperBaby() {
 		var anglePerPage = 180 / 9;
 		var offsetIndex = 5 + curPageIndex - i;
 		var offsetAngle = offsetIndex - 1;
-		var tarX = 5 * Math.cos(degToRad(offsetAngle * anglePerPage + 10));
-		var tarZ = 5 * Math.sin(degToRad(offsetAngle * anglePerPage + 10));
-		$(this).css({
-			'-webkit-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)',
-			'-moz-transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)',
-			'transform': 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)'
+		var rads = degToRad(offsetAngle * anglePerPage + 10);
+		var tarX = 5 * Math.cos(rads);
+		var tarZ = 5 * Math.sin(rads);
+		var $page = $(this);
+		var pageTransform = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
+		$page.css({
+			'-webkit-transform': pageTransform,
+			'-moz-transform': pageTransform,
+			'transform': pageTransform
 		});
 	});
 }
