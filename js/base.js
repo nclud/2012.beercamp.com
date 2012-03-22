@@ -12,9 +12,14 @@ var popups,
 	bgColors,
 	$leftPage,
 	$rightPage,
+	$document = $(document),
+	$window = $(window),
 	$body,
 	$scene,
 	$book,
+	$pages,
+	$dragNotice,
+	$hotSpots,
 	hasTouch,
 	hasOrientation,
 	numTouches,
@@ -34,7 +39,7 @@ var popups,
 
 ****************************/
 
-$(document).ready(function() {
+$document.ready(function() {
 	paperFolding = document.createEvent('Event');
 	paperFolding.initEvent('pageFolding', true, true);
 
@@ -50,6 +55,9 @@ $(document).ready(function() {
 	$body = $('body');
 	$scene = $('.scene');
 	$book = $('.book');
+	$pages = $('.spreads li');
+	$dragNotice = $('.drag-notice');
+	$hotSpots = $('.hotspot');
 	hasTouch = Modernizr.touch;
 	has3d = Modernizr.csstransforms3d;
 
@@ -64,22 +72,22 @@ $(document).ready(function() {
 					window.scrollTo(0, 1);
 				}, 0);
 			}
-			$('.drag-notice').html('Touch and drag<br />to turn pages!');
-			$('.drag-notice').css({
+			$dragNotice.html('Touch and drag<br />to turn pages!');
+			$dragNotice.css({
 				'width': '220px'
 			});
 			$body.bind('touchstart', startDrag);
-			$(window).resize(resizeScene);
+			$window.resize(resizeScene);
 			if(window.DeviceMotionEvent != undefined) {
 				hasOrientation = true;
 				window.addEventListener('deviceorientation', rotateScene, false);
 			}
-			$('.hotspot').bind('touchend', zoomToHotspot);
+			$hotSpots.bind('touchend', zoomToHotspot);
 		} else {
 			$scene.bind('mousedown', startDrag);
-			$(document).mousemove(rotateScene);
-			$(window).resize(resizeScene);
-			$('.hotspot').click(zoomToHotspot);
+			$document.mousemove(rotateScene);
+			$window.resize(resizeScene);
+			$hotSpots.click(zoomToHotspot);
 		}
 		resizeScene();
 		adjustScene();
@@ -108,8 +116,8 @@ function startDrag(e) {
 function updateDrag(e) {
 	e.preventDefault();
 		
-	if($('.drag-notice').hasClass('shown')) {
-		$('.drag-notice').removeClass('shown');
+	if($dragNotice.hasClass('shown')) {
+		$dragNotice.removeClass('shown');
 	}
 
 	var targetX = (hasTouch ? e.originalEvent.touches[0].pageX : e.pageX) - $scene.data('offset');
@@ -145,16 +153,17 @@ function updateDrag(e) {
 	}
 	
 	if(absPer != 1 && absPer != 0) {
-		$('.hotspot').css('pointer-events', 'none');
-		$('.hotspot .indicator').css('opacity', '0');
+		$hotSpots.css('pointer-events', 'none');
+		$hotSpots.find('.indicator').css('opacity', '0');
 	} else {
-		$('.hotspot').css('pointer-events', 'auto');
-		$('.hotspot .indicator').css('opacity', '1');
+		$hotSpots.css('pointer-events', 'auto');
+		$hotSpots.find('.indicator').css('opacity', '1');
 	}
 	
 	if(!shouldBreak) {
-		$leftPage = adjustedPer < 0 ? $('.spreads li').eq( curPageIndex ) : $('.spreads li').eq( curPageIndex - 1 );
-		$rightPage = adjustedPer < 0 ? $('.spreads li:nth-child(' + (curPageIndex + 2) + ')') : $('.spreads li:nth-child(' + (curPageIndex + 1) + ')');
+		$leftPage = adjustedPer < 0 ? $pages.eq( curPageIndex ) : $pages.eq( curPageIndex - 1 );
+		$rightPage = adjustedPer < 0 ? $pages.eq(curPageIndex + 1) : $pages.eq(curPageIndex);
+
 		$leftPage.find('.page-right').css({
 			'-webkit-transform': 'rotateY(' + (-180 * (adjustedPer < 0 ? absPer : 1 - absPer)) + 'deg)',
 			'-moz-transform': 'rotateY(' + (-180 * (adjustedPer < 0 ? absPer : 1 - absPer)) + 'deg)',
@@ -202,7 +211,7 @@ function updateDrag(e) {
 		toggleVisibles(absPer * 180, dir == 'right' ? curPageIndex : curPageIndex - 1);
 	}
 	
-	$('.spreads li').each(function(i) {
+	$pages.each(function(i) {
 		var anglePerPage = 180 / 9;
 		var offsetIndex = adjustedPer < 0 ? 5 + curPageIndex - i : 5 + curPageIndex - i - 2;
 		var offsetAngle = adjustedPer < 0 ? offsetIndex - adjustedPer - 1 : offsetIndex - adjustedPer + 1;
@@ -258,9 +267,9 @@ function stopDrag(e) {
 }
 
 function toggleVisibles(per, leftIndex) {
-	var curPage = $('.spreads li').eq( curPageIndex );
-	var nextPage = $('.spreads li').eq(curPageIndex + 1);
-	var prevPage = $('.spreads li').eq(curPageIndex - 1);
+	var curPage = $pages.eq( curPageIndex );
+	var nextPage = $pages.eq(curPageIndex + 1);
+	var prevPage = $pages.eq(curPageIndex - 1);
 
 	var toTurn1;
 	var toTurn2;
@@ -321,14 +330,16 @@ function zoomToHotspot(e) {
 	
 	$body.unbind('click');
 	$body.unbind('touchend');
-	var hotspot = $('.hotspot.focused').length > 0 ? $('.hotspot.focused') : $(this);
+	var $spot = $(this);
+	var $focusedSpot = $hotSpots.filter('.focused');
+	var hotspot = $focusedSpot.length > 0 ? $focusedSpot : $spot;
 	var indicator = hotspot.children('.indicator');
 	
 	if(zoomedIn) {
 		setTimeout(function(e) {
 			hotspot.removeClass('focused');
 		}, 1);
-		$('.spreads li').show();
+		$pages.show();
 		
 		adjustScene();
 		
@@ -349,13 +360,13 @@ function zoomToHotspot(e) {
 			if(hasOrientation) {
 				window.addEventListener('deviceorientation', rotateScene, false);
 			} else {
-				$(document).mousemove(rotateScene);
+				$document.mousemove(rotateScene);
 			}
 		}, 600);
 	} else {
 		hotspot.addClass('focused');
 		var thisSpread = hotspot.parents('.spreads li');
-		$('.spreads li').not(thisSpread).hide();
+		$pages.not(thisSpread).hide();
 		indicator.css({
 			'margin-left': indicator.attr('data-offsetX') + 'px',
 			'margin-top': indicator.attr('data-offsetY') + 'px'
@@ -370,7 +381,7 @@ function zoomToHotspot(e) {
 		if(hasOrientation) {
 			window.removeEventListener('deviceorientation', rotateScene);
 		} else {
-			$(document).unbind('mousemove');
+			$document.unbind('mousemove');
 		}
 		
 		$body.unbind(hasTouch ? 'touchmove' : 'mousemove');
@@ -386,8 +397,8 @@ function zoomToHotspot(e) {
 			$body.bind('touchend', zoomToHotspot);
 		}, 1);
 		
-		var section = $(this).parent().parent().attr('class');
-		
+		var section = $spot.parent().parent().attr('class');
+
 		switch(section) {
 			case 'intro':
 				$scene.css({
@@ -509,13 +520,14 @@ function radToDeg(rad) {
 function craftThatPaperBaby() {
 	popups = [];
 	$('.popup').each(function(i) {
-		var master = $(this).parent().parent();
-		var depth = $(this).attr('data-depth');
-		var popup = new Popup($(this), depth);
+		var $popup = $(this);
+		var master = $popup.parent().parent();
+		var depth = $popup.attr('data-depth');
+		var popup = new Popup($popup, depth);
 		popups.push(popup);
 	});
 	
-	$('.spreads li').each(function(i) {
+	$pages.each(function(i) {
 		var anglePerPage = 180 / 9;
 		var offsetIndex = 5 + curPageIndex - i;
 		var offsetAngle = offsetIndex - 1;
