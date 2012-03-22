@@ -78,9 +78,7 @@ $document.ready(function() {
 	selectionEvent = hasTouch ? 'touchend' : 'click';
 	has3d = Modernizr.csstransforms3d;
 
-	if(!has3d) {
-		$body.addClass('no3d');
-	} else {
+	if(has3d) {
 		craftThatPaperBaby();
 		if(hasTouch) {
 			if($body.width() <= 960) {
@@ -101,6 +99,8 @@ $document.ready(function() {
 
 		resizeScene();
 		adjustScene();
+	} else {
+		$body.addClass('no3d');
 	}
 });
 
