@@ -47,7 +47,7 @@ var popups,
 
 ****************************/
 
-$document.ready(function() {
+$document.ready(function () {
 	paperFolding = document.createEvent('Event');
 	paperFolding.initEvent('pageFolding', true, true);
 
@@ -78,9 +78,9 @@ $document.ready(function() {
 	selectionEvent = hasTouch ? 'touchend' : 'click';
 	has3d = Modernizr.csstransforms3d;
 
-	if(has3d) {
+	if (has3d) {
 		craftThatPaperBaby();
-		if(hasTouch) {
+		if (hasTouch) {
 			hideLocationBar();
 			$dragNotice.html('Touch and drag<br />to turn pages!');
 			$dragNotice.css({
@@ -120,25 +120,25 @@ function startDrag(e) {
 
 function updateDrag(e) {
 	e.preventDefault();
-		
-	if($dragNotice.hasClass('shown')) {
+
+	if ($dragNotice.hasClass('shown')) {
 		$dragNotice.removeClass('shown');
 	}
 
 	var targetX = (hasTouch ? e.originalEvent.touches[0].pageX : e.pageX) - $scene.data('offset');
 	var per = targetX / $body.width() * 2.5;
 	var shouldBreak = false;
-	
+
 	per = per < -1 ? -1 : per;
 	per = per > 1 ? 1 : per;
-	
+
 	var dir = per < 0 ? 'left' : 'right';
-		
-	if(curPer + per < 0 && adjustedPer > 0) {
+
+	if (curPer + per < 0 && adjustedPer > 0) {
 		shouldBreak = true;
 		curPer = adjustedPer = 0;
 		stopDrag();
-	} else if(curPer + per > 0 && adjustedPer < 0) {
+	} else if (curPer + per > 0 && adjustedPer < 0) {
 		shouldBreak = true;
 		curPer = adjustedPer = 0;
 		stopDrag();
@@ -148,16 +148,16 @@ function updateDrag(e) {
 		adjustedPer = adjustedPer > 1 ? 1 : adjustedPer;
 		adjustedPer = Math.round(adjustedPer * 1000) / 1000;
 	}
-	
+
 	var absPer = Math.abs(adjustedPer);
-	
-	if((curPageIndex == 0 && adjustedPer > 0) || (curPageIndex == 4 && adjustedPer < 0)) {
+
+	if ((curPageIndex == 0 && adjustedPer > 0) || (curPageIndex == 4 && adjustedPer < 0)) {
 		stopDrag();
 		curPer = adjustedPer = 0;
 		return;
 	}
-	
-	if(absPer != 1 && absPer != 0) {
+
+	if (absPer != 1 && absPer != 0) {
 		$hotSpots.css('pointer-events', 'none');
 		$hotSpots.find('.indicator').css('opacity', '0');
 	} else {
@@ -167,7 +167,7 @@ function updateDrag(e) {
 
 	var leftTransform;
 	var rightTransform;
-	if(!shouldBreak) {
+	if (!shouldBreak) {
 		$leftPage = adjustedPer < 0 ? $pages.eq( curPageIndex ) : $pages.eq( curPageIndex - 1 );
 		$rightPage = adjustedPer < 0 ? $pages.eq(curPageIndex + 1) : $pages.eq(curPageIndex);
 		rightTransform = 'rotateY(' + (-180 * (adjustedPer < 0 ? absPer : 1 - absPer)) + 'deg)';
@@ -176,15 +176,15 @@ function updateDrag(e) {
 		$rightPage.find('.page-left').css(cssTransformProperty, leftTransform);
 
 		paperFolding.per = adjustedPer < 0 ? absPer : 1 - absPer;
-		if($leftPage[0]) {
+		if ($leftPage[0]) {
 			$leftPage[0].dispatchEvent(paperFolding);
 		}
 		
 		paperFolding.per = adjustedPer < 0 ? 1 - absPer : absPer;
-		if($rightPage[0]) {
+		if ($rightPage[0]) {
 			$rightPage[0].dispatchEvent(paperFolding);
 		}
-		
+
 		toggleVisibles(absPer * 180, adjustedPer < 0 ? curPageIndex : curPageIndex - 1);
 	} else {
 		rightTransform = 'rotateY(' + (-180 * (dir == 'right' ? absPer : 1 - absPer)) + 'deg)';
@@ -192,19 +192,19 @@ function updateDrag(e) {
 		$leftPage.find('.page-right').css(cssTransformProperty, rightTransform);
 		$rightPage.find('.page-left').css(cssTransformProperty, leftTransform);
 		paperFolding.per = dir == 'right' ? absPer : 1 - absPer;
-		if($leftPage[0]) {
+		if ($leftPage[0]) {
 			$leftPage[0].dispatchEvent(paperFolding);
 		}
-		
+
 		paperFolding.per = dir == 'right' ? 1 - absPer : absPer;
-		if($rightPage[0]) {
+		if ($rightPage[0]) {
 			$rightPage[0].dispatchEvent(paperFolding);
 		}
-		
+
 		toggleVisibles(absPer * 180, dir == 'right' ? curPageIndex : curPageIndex - 1);
 	}
-	
-	$pages.each(function(i) {
+
+	$pages.each(function (i) {
 		var anglePerPage = 180 / 9;
 		var offsetIndex = adjustedPer < 0 ? 5 + curPageIndex - i : 5 + curPageIndex - i - 2;
 		var offsetAngle = adjustedPer < 0 ? offsetIndex - adjustedPer - 1 : offsetIndex - adjustedPer + 1;
@@ -214,20 +214,20 @@ function updateDrag(e) {
 		var transform = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
 		$(this).css(cssTransformProperty, transform);
 	});
-	
+
 	var bookTransform;
-	if(curPageIndex == 0) {
+	if (curPageIndex == 0) {
 		bookTransform = 'translateX(' + (-300 + (300 * absPer)) + 'px) rotateX(' + (29 + (61 * absPer)) + 'deg) rotateZ(' + (-8 + (8 * absPer)) + 'deg) translateZ(' + (100 - (100 * absPer)) + 'px)';
-	} else if(curPageIndex == 1 && adjustedPer > 0) {
+	} else if (curPageIndex == 1 && adjustedPer > 0) {
 		bookTransform = 'translateX(' + (-300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px)';
-	} else if(curPageIndex == 3 && adjustedPer < 0) {
+	} else if (curPageIndex == 3 && adjustedPer < 0) {
 		bookTransform = 'translateX(' + (300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px) translateY(' + (-120 * absPer) + 'px)';
-	} else if(curPageIndex == 4) {
+	} else if (curPageIndex == 4) {
 		bookTransform = 'translateX(' + (300 - (300 * adjustedPer)) + 'px) rotateX(' + (29 + (61 * adjustedPer)) + 'deg) rotateZ(' + (-8 + (8 * adjustedPer)) + 'deg) translateZ(' + (100 - (100 * adjustedPer)) + 'px) translateY(' + (-120 + (120 * adjustedPer)) + 'px)';
 	}
 	$book.css(cssTransformProperty, bookTransform);
 
-	if(absPer >= 1) {
+	if (absPer >= 1) {
 		adjustedPer < 0 ? curPageIndex++ : curPageIndex--;
 		curPer = adjustedPer = 0;
 		stopDrag();
@@ -250,37 +250,37 @@ function toggleVisibles(per, leftIndex) {
 	var toTurn1;
 	var toTurn2;
 
-	if(leftIndex == curPageIndex) {
+	if (leftIndex == curPageIndex) {
 		toTurn1 = curPage;
 		toTurn2 = nextPage;
 	} else {
 		toTurn1 = curPage;
 		toTurn2 = prevPage;
 	}
-	
-	if(per > 179.5) {
+
+	if (per > 179.5) {
 		toTurn1.find('.popup').hide();
 		toTurn1.find('.hotspot').hide();
 	} else {
 		toTurn1.find('.popup').show();
 		toTurn1.find('.hotspot').show();
 	}
-	
-	if(per < 0.5) {
+
+	if (per < 0.5) {
 		toTurn2.find('.popup').hide();
 		toTurn2.find('.hotspot').hide();
 	} else {
 		toTurn2.find('.popup').show();
 		toTurn2.find('.hotspot').show();
 	}
-	
-	if(per > 160) {
+
+	if (per > 160) {
 		toTurn1.find('.hotspot .indicator').hide();
 	} else {
 		toTurn1.find('.hotspot .indicator').show();
 	}
-	
-	if(per < 20) {
+
+	if (per < 20) {
 		toTurn2.find('.hotspot .indicator').hide();
 	} else {
 		toTurn2.find('.hotspot .indicator').show();
@@ -303,25 +303,25 @@ function toggleVisibles(per, leftIndex) {
 
 function zoomToHotspot(e) {
 	e.preventDefault();
-	
+
 	$body.unbind(selectionEvent);
 	$window.unbind(rotationEvent);
 	var $spot = $(this);
 	var $focusedSpot = $hotSpots.filter('.focused');
 	var hotspot = $focusedSpot.length > 0 ? $focusedSpot : $spot;
 	var indicator = hotspot.children('.indicator');
-	
-	if(zoomedIn) {
-		setTimeout(function(e) {
+
+	if (zoomedIn) {
+		setTimeout(function (e) {
 			hotspot.removeClass('focused');
 		}, 1);
 		$pages.show();
-		
+
 		adjustScene();
-		
+
 		$body.bind(dragStartEvent, startDrag);
-		
-		setTimeout(function(e) {
+
+		setTimeout(function (e) {
 			$scene.css({
 				'-webkit-transition': 'none',
 				'-moz-transition': 'none',
@@ -343,23 +343,23 @@ function zoomToHotspot(e) {
 		$body.unbind(dragStartEvent);
 		$window.unbind(rotationEvent, rotateScene);
 		$body.unbind(dragMoveEvent);
-		
+
 		$scene.css({
 			'-webkit-transition': 'all .6s',
 			'-moz-transition': 'all .6s',
 			'transition': 'all .6s'
 		});
-		
-		setTimeout(function() {
+
+		setTimeout(function () {
 			$body.bind(selectionEvent, zoomToHotspot);
 		}, 1);
-		
+
 		var section = $spot.parent().parent().attr('class');
 		var scale = (1 - ((1 - curSceneScale) * 0.3));
 		var scaleTransform = 'scale3d(' + scale + ', ' + scale + ', ' + scale + ')';
 		var translateTransform;
 		var sectionTransform;
-		switch(section) {
+		switch (section) {
 			case 'intro':
 				translateTransform = 'translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
 				break;
@@ -373,7 +373,7 @@ function zoomToHotspot(e) {
 		sectionTransform = scaleTransform + ' ' + translateTransform;
 		$scene.css(cssTransformProperty, sectionTransform);
 	}
-	
+
 	zoomedIn = !zoomedIn;
 }
 
@@ -413,12 +413,12 @@ function resizeScene(e) {
 	var curH = $body.height();
 	var maxW = 1670;
 	var maxH = 725;
-	
+
 	var diffW = curW / maxW;
 	var diffH = curH / maxH;
-	
+
 	curSceneScale = diffW < diffH ? diffW : diffH;
-	
+
 	adjustScene();
 }
 
@@ -469,15 +469,15 @@ function domToCss(property) {
 
 function craftThatPaperBaby() {
 	popups = [];
-	$('.popup').each(function(i) {
+	$('.popup').each(function (i) {
 		var $popup = $(this);
 		var master = $popup.parent().parent();
 		var depth = $popup.attr('data-depth');
 		var popup = new Popup($popup, depth);
 		popups.push(popup);
 	});
-	
-	$pages.each(function(i) {
+
+	$pages.each(function (i) {
 		var anglePerPage = 180 / 9;
 		var offsetIndex = 5 + curPageIndex - i;
 		var offsetAngle = offsetIndex - 1;
@@ -491,9 +491,9 @@ function craftThatPaperBaby() {
 }
 
 function hideLocationBar() {
-	if($body.width() <= 960) {
+	if ($body.width() <= 960) {
 		$body.css('padding-bottom', '80px');
-		setTimeout(function() {
+		setTimeout(function () {
 			window.scrollTo(0, 1);
 		}, 0);
 	}
