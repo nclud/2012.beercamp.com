@@ -12,6 +12,8 @@ var popups,
 	bgColors,
 	domTransformProperty,
 	cssTransformProperty,
+	domTransitionProperty,
+	cssTransitionProperty,
 	$leftPage,
 	$rightPage,
 	$document = $(document),
@@ -31,6 +33,14 @@ var popups,
 	dragMoveEvent,
 	dragStopEvent,
 	selectionEvent,
+	transitionEndEvents = {
+		'WebkitTransition' : 'webkitTransitionEnd',
+		'MozTransition'    : 'transitionend',
+		'OTransition'      : 'oTransitionEnd',
+		'msTransition'     : 'MSTransitionEnd',
+		'transition'       : 'transitionend'
+	},
+	transitionEndEvent,
 	initialOrientation,
 	PAGE_TURN_SPEED = 25;
 
@@ -59,8 +69,10 @@ $document.ready(function () {
 	zoomedIn = false;
 	curRotX = -15;
 	numTouches = 0;
-	domTransformProperty = Modernizr.prefixed('transform'),
-	cssTransformProperty = domToCss(domTransformProperty),
+	domTransformProperty = Modernizr.prefixed('transform');
+	cssTransformProperty = domToCss(domTransformProperty);
+	domTransitionProperty = Modernizr.prefixed('transition');
+	cssTransitionProperty = domToCss(domTransitionProperty);
 	bgColors = ['#3272ad', '#ae0039', '#50326d', '#355506', '#3272ad'];
 	$body = $('body');
 	$scene = $('.scene');
@@ -76,6 +88,7 @@ $document.ready(function () {
 	dragMoveEvent = hasTouch ? 'touchmove' : 'mousemove';
 	dragStopEvent = hasTouch ? 'touchend' : 'mouseup';
 	selectionEvent = hasTouch ? 'touchend' : 'click';
+	transitionEndEvent = transitionEndEvents[ domTransitionProperty ];
 	has3d = Modernizr.csstransforms3d;
 
 	if (has3d) {
@@ -319,13 +332,8 @@ function zoomToHotspot(e) {
 		$body.bind(dragStartEvent, startDrag);
 
 		setTimeout(function (e) {
-			$scene.css({
-				'-webkit-transition': 'none',
-				'-moz-transition': 'none',
-				'transition': 'none'
-			});
-			$scene.unbind('webkitTransitionEnd');
-			$scene.unbind('transitionend');
+			$scene.css(cssTransitionProperty, 'none');
+			$scene.unbind(domTransitionProperty);
 			$window.bind(rotationEvent, rotateScene);
 		}, 600);
 	} else {
@@ -341,11 +349,7 @@ function zoomToHotspot(e) {
 		$window.unbind(rotationEvent, rotateScene);
 		$body.unbind(dragMoveEvent);
 
-		$scene.css({
-			'-webkit-transition': 'all .6s',
-			'-moz-transition': 'all .6s',
-			'transition': 'all .6s'
-		});
+		$scene.css(cssTransitionProperty, 'all .6s');
 
 		setTimeout(function () {
 			$body.bind(selectionEvent, zoomToHotspot);
