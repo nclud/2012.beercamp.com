@@ -150,7 +150,7 @@ body {
 	transform-style: preserve-3d;
 }
 
-.spreads li {
+.spread {
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	transform-style: preserve-3d;

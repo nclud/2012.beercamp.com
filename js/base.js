@@ -19,7 +19,7 @@ var popups,
 	$body,
 	$scene,
 	$book,
-	$pages,
+	$spreads,
 	$dragNotice,
 	$hotSpots,
 	hasTouch,
@@ -65,7 +65,7 @@ $document.ready(function () {
 	$body = $('body');
 	$scene = $('.scene');
 	$book = $('.book');
-	$pages = $('.spreads li');
+	$spreads = $('.spread');
 	$dragNotice = $('.drag-notice');
 	$hotSpots = $('.hotspot');
 	hasTouch = Modernizr.touch;
@@ -165,8 +165,8 @@ function updateDrag(e) {
 	var leftTransform;
 	var rightTransform;
 	if (!shouldBreak) {
-		$leftPage = adjustedPer < 0 ? $pages.eq( curPageIndex ) : $pages.eq( curPageIndex - 1 );
-		$rightPage = adjustedPer < 0 ? $pages.eq(curPageIndex + 1) : $pages.eq(curPageIndex);
+		$leftPage = adjustedPer < 0 ? $spreads.eq( curPageIndex ) : $spreads.eq( curPageIndex - 1 );
+		$rightPage = adjustedPer < 0 ? $spreads.eq(curPageIndex + 1) : $spreads.eq(curPageIndex);
 		rightTransform = 'rotateY(' + (-180 * (adjustedPer < 0 ? absPer : 1 - absPer)) + 'deg)';
 		leftTransform = 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)';
 		$leftPage.find('.page-right').css(cssTransformProperty, rightTransform);
@@ -201,7 +201,7 @@ function updateDrag(e) {
 		toggleVisibles(absPer * 180, dir == 'right' ? curPageIndex : curPageIndex - 1);
 	}
 
-	$pages.each(function (i) {
+	$spreads.each(function (i) {
 		var anglePerPage = 180 / 9;
 		var offsetIndex = adjustedPer < 0 ? 5 + curPageIndex - i : 5 + curPageIndex - i - 2;
 		var offsetAngle = adjustedPer < 0 ? offsetIndex - adjustedPer - 1 : offsetIndex - adjustedPer + 1;
@@ -240,9 +240,9 @@ function stopDrag(e) {
 }
 
 function toggleVisibles(per, leftIndex) {
-	var curPage = $pages.eq( curPageIndex );
-	var nextPage = $pages.eq(curPageIndex + 1);
-	var prevPage = $pages.eq(curPageIndex - 1);
+	var curPage = $spreads.eq( curPageIndex );
+	var nextPage = $spreads.eq(curPageIndex + 1);
+	var prevPage = $spreads.eq(curPageIndex - 1);
 
 	var toTurn1;
 	var toTurn2;
@@ -312,7 +312,7 @@ function zoomToHotspot(e) {
 		setTimeout(function (e) {
 			hotspot.removeClass('focused');
 		}, 1);
-		$pages.show();
+		$spreads.show();
 
 		adjustScene();
 
@@ -330,8 +330,8 @@ function zoomToHotspot(e) {
 		}, 600);
 	} else {
 		hotspot.addClass('focused');
-		var thisSpread = hotspot.parents('.spreads li');
-		$pages.not(thisSpread).hide();
+		var thisSpread = hotspot.parents('.spread');
+		$spreads.not(thisSpread).hide();
 		indicator.css({
 			'margin-left': indicator.attr('data-offsetX') + 'px',
 			'margin-top': indicator.attr('data-offsetY') + 'px'
@@ -351,24 +351,20 @@ function zoomToHotspot(e) {
 			$body.bind(selectionEvent, zoomToHotspot);
 		}, 1);
 
-		var section = $spot.parent().parent().attr('class');
+		var $spread = $spot.parents('.spread');
 		var scale = (1 - ((1 - curSceneScale) * 0.3));
 		var scaleTransform = 'scale3d(' + scale + ', ' + scale + ', ' + scale + ')';
 		var translateTransform;
-		var sectionTransform;
-		switch (section) {
-			case 'intro':
-				translateTransform = 'translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
-				break;
-			case 'location':
-				translateTransform = 'translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
-				break;
-			case 'music':
-				translateTransform = 'translateY(-200px) translateX(315px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
-				break;
+		var spreadTransform;
+		if ($spread.hasClass('intro')) {
+			translateTransform = 'translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
+		} else if ($spread.hasClass('location')) {
+			translateTransform = 'translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
+		} else if ($spread.hasClass('music')) {
+			translateTransform = 'translateY(-200px) translateX(315px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
 		}
-		sectionTransform = scaleTransform + ' ' + translateTransform;
-		$scene.css(cssTransformProperty, sectionTransform);
+		spreadTransform = scaleTransform + ' ' + translateTransform;
+		$scene.css(cssTransformProperty, spreadTransform);
 	}
 
 	zoomedIn = !zoomedIn;
@@ -480,16 +476,16 @@ function craftThatPaperBaby() {
 		popups.push(popup);
 	});
 
-	$pages.each(function (i) {
+	$spreads.each(function (i) {
 		var anglePerPage = 180 / 9;
 		var offsetIndex = 5 + curPageIndex - i;
 		var offsetAngle = offsetIndex - 1;
 		var rads = degToRad(offsetAngle * anglePerPage + 10);
 		var tarX = 5 * Math.cos(rads);
 		var tarZ = 5 * Math.sin(rads);
-		var $page = $(this);
+		var $spread = $(this);
 		var pageTransform = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
-		$page.css(cssTransformProperty, pageTransform);
+		$spread.css(cssTransformProperty, pageTransform);
 	});
 }
 
