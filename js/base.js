@@ -129,8 +129,7 @@ function updateDrag(e) {
 	var per = targetX / $body.width() * 2.5;
 	var shouldBreak = false;
 
-	per = per < -1 ? -1 : per;
-	per = per > 1 ? 1 : per;
+	per = clamp(per, -1, 1);
 
 	var dir = per < 0 ? 'left' : 'right';
 
@@ -143,9 +142,7 @@ function updateDrag(e) {
 		curPer = adjustedPer = 0;
 		stopDrag();
 	} else {
-		adjustedPer = curPer + per;
-		adjustedPer = adjustedPer < -1 ? -1 : adjustedPer;
-		adjustedPer = adjustedPer > 1 ? 1 : adjustedPer;
+		adjustedPer = clamp(curPer + per, -1, 1);
 		adjustedPer = Math.round(adjustedPer * 1000) / 1000;
 	}
 
@@ -454,7 +451,13 @@ function domToCss(property) {
 	return css;
 }
 
+function clamp( val, min, max ){
 
+	if (val > max) return max;
+	if (val < min) return min;
+
+	return val;
+}
 
 
 
