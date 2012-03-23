@@ -81,12 +81,7 @@ $document.ready(function() {
 	if(has3d) {
 		craftThatPaperBaby();
 		if(hasTouch) {
-			if($body.width() <= 960) {
-				$body.css('padding-bottom', '80px');
-				setTimeout(function() {
-					window.scrollTo(0, 1);
-				}, 0);
-			}
+			hideLocationBar();
 			$dragNotice.html('Touch and drag<br />to turn pages!');
 			$dragNotice.css({
 				'width': '220px'
@@ -413,13 +408,7 @@ function adjustScene() {
 }
 
 function resizeScene(e) {
-	if($body.width() <= 960) {
-		$body.css('padding-bottom', '80px');
-		setTimeout(function() {
-			window.scrollTo(0, 1);
-		}, 0);
-	}
-
+	hideLocationBar();
 	var curW = $body.width();
 	var curH = $body.height();
 	var maxW = 1670;
@@ -501,3 +490,11 @@ function craftThatPaperBaby() {
 	});
 }
 
+function hideLocationBar() {
+	if($body.width() <= 960) {
+		$body.css('padding-bottom', '80px');
+		setTimeout(function() {
+			window.scrollTo(0, 1);
+		}, 0);
+	}
+}
