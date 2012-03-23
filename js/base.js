@@ -470,7 +470,7 @@ function craftThatPaperBaby() {
 	popups = [];
 	$('.popup').each(function (i) {
 		var $popup = $(this);
-		var master = $popup.parent().parent();
+		var master = $popup.parents('.spread');
 		var depth = $popup.attr('data-depth');
 		var popup = new Popup($popup, depth);
 		popups.push(popup);
