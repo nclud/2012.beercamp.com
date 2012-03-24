@@ -1,26 +1,19 @@
-function Popup(g, d) {
-	
-	var	graphic = g,
-		master = g.parent().parent(),
-		depth = d,
-		fold = 1,
-		zRot = g.parent().hasClass('page-left') ? 15 : -15,
+function Popup(graphic, depth, event) {
+	if (!event) event = 'pageFolding';
+	var master = graphic.parents('.spread'),
+		zRot = graphic.parents('.page').hasClass('page-left') ? 15 : -15,
 		timer,
 		POPUP_WIDTH = 300;
 	
-	init();
+	master.bind(event, function (e, per) {
+		var fold = per >= 0 ? per : 0;
+		setFold(fold);
+	});
 	
-	function init() {		
-		master.bind('pageFolding', function(e) {
-			fold = e.originalEvent.per >= 0 ? e.originalEvent.per : 0;
-			//console.log(fold);
-			setFold();
-		});
-		
-		setFold();
-	}
+	setFold(1);
+
 	
-	function setFold() {
+	function setFold(fold) {
 		var points = [];
 		
 		// origin

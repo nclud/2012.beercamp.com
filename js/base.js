@@ -1,5 +1,5 @@
 var popups,
-	paperFolding,
+	paperFolding = 'pageFolding',
 	curPageIndex,
 	timer,
 	zoomedIn,
@@ -58,8 +58,6 @@ var popups,
 ****************************/
 
 $document.ready(function () {
-	paperFolding = document.createEvent('Event');
-	paperFolding.initEvent('pageFolding', true, true);
 
 	curPageIndex = 0;
 	curSceneScale = 1;
@@ -185,14 +183,12 @@ function updateDrag(e) {
 		$leftPage.find('.page-right').css(cssTransformProperty, rightTransform);
 		$rightPage.find('.page-left').css(cssTransformProperty, leftTransform);
 
-		paperFolding.per = adjustedPer < 0 ? absPer : 1 - absPer;
-		if ($leftPage[0]) {
-			$leftPage[0].dispatchEvent(paperFolding);
+		if ($leftPage) {
+			$leftPage.trigger(paperFolding, adjustedPer < 0 ? absPer : 1 - absPer);
 		}
-		
-		paperFolding.per = adjustedPer < 0 ? 1 - absPer : absPer;
-		if ($rightPage[0]) {
-			$rightPage[0].dispatchEvent(paperFolding);
+
+		if ($rightPage) {
+			$rightPage.trigger(paperFolding, adjustedPer < 0 ? 1 - absPer : absPer);
 		}
 
 		toggleVisibles(absPer * 180, adjustedPer < 0 ? curPageIndex : curPageIndex - 1);
@@ -201,14 +197,13 @@ function updateDrag(e) {
 		leftTransform = 'rotateY(' + (180 * (dir == 'right' ? 1 - absPer : absPer)) + 'deg)';
 		$leftPage.find('.page-right').css(cssTransformProperty, rightTransform);
 		$rightPage.find('.page-left').css(cssTransformProperty, leftTransform);
-		paperFolding.per = dir == 'right' ? absPer : 1 - absPer;
-		if ($leftPage[0]) {
-			$leftPage[0].dispatchEvent(paperFolding);
+
+		if ($leftPage) {
+			$leftPage.trigger(paperFolding, dir == 'right' ? absPer : 1 - absPer);
 		}
 
-		paperFolding.per = dir == 'right' ? 1 - absPer : absPer;
-		if ($rightPage[0]) {
-			$rightPage[0].dispatchEvent(paperFolding);
+		if ($rightPage) {
+			$rightPage.trigger(paperFolding, dir == 'right' ? 1 - absPer : absPer);
 		}
 
 		toggleVisibles(absPer * 180, dir == 'right' ? curPageIndex : curPageIndex - 1);
