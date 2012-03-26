@@ -436,7 +436,7 @@ function domToCss(property) {
 	return css;
 }
 
-function clamp( val, min, max ){
+function clamp(val, min, max){
 
 	if (val > max) return max;
 	if (val < min) return min;
@@ -491,50 +491,63 @@ function Popup(graphic, depth, event) {
 	if (!event) event = 'pageFolding';
 	var master = graphic.parents('.spread'),
 		zRot = graphic.parents('.page').hasClass('page-left') ? 15 : -15,
-		POPUP_WIDTH = 300;
-	
+		POPUP_WIDTH = 300,
+		// XXX: These names are atrocious, but `Math.pow` is slooow
+		//  http://jsperf.com/pow-or-multiplication
+		rn180z = 0, //degToRad(-180 * 0),
+		rn15 = degToRad(-15),
+		pws15 = POPUP_WIDTH * Math.sin(rn15),
+		pws180 = 0, //POPUP_WIDTH * Math.sin(rn180z),
+		pw2 = POPUP_WIDTH * POPUP_WIDTH,
+		pws152 = pws15 * pws15,
+		adj = Math.sqrt(pw2 - pws15)
+	;
+
 	master.bind(event, function (e, per) {
 		var fold = clamp(per, 0);
 		setFold(fold);
 	});
-	
+
 	setFold(1);
 
 	
 	function setFold(fold) {
-		var points = [];
-		
+		var f180 = -180 * fold;
+		var rf180 = degToRad(f180);
+		var rf180n90 = degToRad(f180 - 90);
+		var acrf180 = -adj * Math.cos(rf180);
+		var asrf180 = adj * Math.sin(rf180);
+		var len = Math.sqrt((acrf180 * acrf180) + (asrf180 * asrf180) + pws152);
+
 		// origin
-		points[0] = [0, 0, 0];
-		
+		var p0 = [0, 0, 0];
+
 		// left piece: bottom outside
-		points[1] = [-POPUP_WIDTH * Math.cos(degToRad(-180 * fold)), POPUP_WIDTH * Math.sin(degToRad(-180 * fold)), POPUP_WIDTH * Math.sin(degToRad(-15))];
-		
+		var p1 = [acrf180, asrf180, pws15];
+
 		// right piece: bottom outside
-		points[2] = [POPUP_WIDTH * Math.cos(degToRad(-180 * 0)), POPUP_WIDTH * Math.sin(degToRad(-180 * 0)), POPUP_WIDTH * Math.sin(degToRad(-15))];
-		
+		var p2 = [1, pws180, pws15];
+
 		// left piece: top inside
-		points[3] = [-POPUP_WIDTH * Math.cos(degToRad((-180 * fold) - 90)), POPUP_WIDTH * Math.sin(degToRad((-180 * fold) - 90)), 0];
-		
-		
-		
-		var adj = Math.sqrt(Math.pow(POPUP_WIDTH, 2) - Math.pow(POPUP_WIDTH * Math.sin(degToRad(-15)), 2));
-		points[1] = [-adj * Math.cos(degToRad(-180 * fold)), adj * Math.sin(degToRad(-180 * fold)), POPUP_WIDTH * Math.sin(degToRad(-15))];
-		points[2] = [adj * Math.cos(degToRad(-180 * 0)), POPUP_WIDTH * Math.sin(degToRad(-180 * 0)), POPUP_WIDTH * Math.sin(degToRad(-15))];
-		var len = Math.sqrt(Math.pow(points[1][0], 2) + Math.pow(points[1][1], 2) + Math.pow(points[1][2], 2));
-		
+		var p3 = [
+			-POPUP_WIDTH * Math.cos(rf180n90),
+			POPUP_WIDTH * Math.sin(rf180n90),
+			0
+		];
+
 		// normalize the vectors
-		var normV1 = $V([points[1][0] / len, points[1][1] / len, points[1][2] / len]);
-		var normV2 = $V([points[2][0] / len, points[2][1] / len, points[2][2] / len]);
-		var normV3 = $V([points[3][0] / len, points[3][1] / len, points[3][2] / len]);
-		
+		var normV1 = $V([p1[0] / len, p1[1] / len, p1[2] / len]);
+		var normV2 = $V([p2[0] / len, p2[1] / len, p2[2] / len]);
+		var normV3 = $V([p3[0] / len, p3[1] / len, p3[2] / len]);
+
 		// calculate the cross vector
 		var cross = normV1.cross(normV2);
-		
+
 		// calculate the cross vector's angle from vector 3
 		var crossAngle = -radToDeg(cross.angleFrom(normV3)) - 90;
-		
+
 		// transform the shape
-		graphic.css(cssTransformProperty, 'translateY(' + depth + 'px) rotateZ(' + zRot + 'deg) rotateX(' + crossAngle + 'deg)');
+		var transform = 'translateY(' + depth + 'px) rotateZ(' + zRot + 'deg) rotateX(' + crossAngle + 'deg)';
+		graphic.css(cssTransformProperty, transform);
 	}
 }
