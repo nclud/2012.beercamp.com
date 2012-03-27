@@ -463,7 +463,6 @@ function craftThatPaperBaby() {
 		var depth = $popup.attr('data-depth');
 		var popup = new Popup($popup, depth, paperFolding);
 
-		popup.setFold(1);
 		popups.push(popup);
 	});
 
@@ -502,6 +501,7 @@ function Popup(graphic, depth, event) {
 
 	var onFold = function (e, per) { this.setFold(per); }.bind(this);
 	graphic.parents('.spread').bind(paperFolding, onFold);
+	this.setFold(1);
 }
 
 Popup.prototype.setFold = function (fold) {
