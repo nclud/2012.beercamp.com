@@ -511,7 +511,7 @@ function Popup(graphic, depth, event) {
 		var p1 = [-adj * Math.cos(degToRad(-180 * fold)), adj * Math.sin(degToRad(-180 * fold)), POPUP_WIDTH * Math.sin(degToRad(-15))];
 
 		// right piece: bottom outside
-		var p2 = [adj, POPUP_WIDTH * Math.sin(degToRad(-180 * 0)), POPUP_WIDTH * Math.sin(degToRad(-15))];
+		var p2 = [adj, 0, POPUP_WIDTH * Math.sin(degToRad(-15))];
 
 		// left piece: top inside
 		var p3 = [-POPUP_WIDTH * Math.cos(degToRad((-180 * fold) - 90)), POPUP_WIDTH * Math.sin(degToRad((-180 * fold) - 90)), 0];
