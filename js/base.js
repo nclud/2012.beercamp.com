@@ -498,14 +498,14 @@ function Popup(graphic, depth, event) {
 	;
 	
 	master.bind(event, function (e, per) {
-		var fold = clamp(per, 0);
-		setFold(fold);
+		setFold(per);
 	});
 	
 	setFold(1);
 
 	
 	function setFold(fold) {
+		fold = clamp(fold, 0);
 		var adj = Math.sqrt(POPUP_SQUARE - pwsrs);
 		var f180 = -180 * fold;
 		var f180r = degToRad(f180);
