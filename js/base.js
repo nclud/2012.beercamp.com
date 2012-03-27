@@ -530,6 +530,7 @@ function Popup(graphic, depth, event) {
 		var crossAngle = -radToDeg(cross.angleFrom(normV3)) - 90;
 		
 		// transform the shape
-		graphic.css(cssTransformProperty, 'translateY(' + depth + 'px) rotateZ(' + zRot + 'deg) rotateX(' + crossAngle + 'deg)');
+		var transform = 'translateY(' + depth + 'px) rotateZ(' + zRot + 'deg) rotateX(' + crossAngle + 'deg)';
+		graphic.css(cssTransformProperty, transform);
 	}
 }
