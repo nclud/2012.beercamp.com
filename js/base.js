@@ -462,6 +462,8 @@ function craftThatPaperBaby() {
 		var master = $popup.parents('.spread');
 		var depth = $popup.attr('data-depth');
 		var popup = new Popup($popup, depth, paperFolding);
+
+		popup.setFold(1);
 		popups.push(popup);
 	});
 
@@ -489,55 +491,52 @@ function hideLocationBar() {
 
 function Popup(graphic, depth, event) {
 	if (!event) event = 'pageFolding';
-	var master = graphic.parents('.spread'),
-		zRot = graphic.parents('.page').hasClass('page-left') ? 15 : -15,
-		POPUP_WIDTH = 300,
-		POPUP_SQUARE = POPUP_WIDTH * POPUP_WIDTH,
-		pwsr = POPUP_WIDTH * Math.sin(degToRad(-15)),
-		pwsrs = pwsr * pwsr
+	this.graphic = graphic;
+	this.depth = depth;
+	this.zRot = graphic.parents('.page').hasClass('page-left') ? 15 : -15;
+	this.POPUP_WIDTH = 300;
+	this.POPUP_SQUARE = this.POPUP_WIDTH * this.POPUP_WIDTH;
+	this.pwsr = this.POPUP_WIDTH * Math.sin(degToRad(-15));
+	this.pwsrs = this.pwsr * this.pwsr
 	;
+
+	var onFold = function (e, per) { this.setFold(per); }.bind(this);
+	graphic.parents('.spread').bind(paperFolding, onFold);
+}
+
+Popup.prototype.setFold = function (fold) {
+	fold = clamp(fold, 0);
+	var adj = Math.sqrt(this.POPUP_SQUARE - this.pwsrs);
+	var f180 = -180 * fold;
+	var f180r = degToRad(f180);
+	var f180nr = degToRad((f180) - 90);
+
+	// origin
+	var p0 = [0, 0, 0];
+
+	// left piece: bottom outside
+	var p1 = [-adj * Math.cos(f180r), adj * Math.sin(f180r), this.pwsr];
+
+	// right piece: bottom outside
+	var p2 = [adj, 0, this.pwsr];
+
+	// left piece: top inside
+	var p3 = [-this.POPUP_WIDTH * Math.cos(f180nr), this.POPUP_WIDTH * Math.sin(f180nr), 0];
+
+
+	// normalize the vectors
+	var len = Math.sqrt(p1[0] * p1[0] + p1[1] * p1[1] + p1[2] * p1[2]);
+	var normV1 = $V([p1[0] / len, p1[1] / len, p1[2] / len]);
+	var normV2 = $V([p2[0] / len, p2[1] / len, p2[2] / len]);
+	var normV3 = $V([p3[0] / len, p3[1] / len, p3[2] / len]);
+
+	// calculate the cross vector
+	var cross = normV1.cross(normV2);
 	
-	master.bind(event, function (e, per) {
-		setFold(per);
-	});
+	// calculate the cross vector's angle from vector 3
+	var crossAngle = -radToDeg(cross.angleFrom(normV3)) - 90;
 	
-	setFold(1);
-
-	
-	function setFold(fold) {
-		fold = clamp(fold, 0);
-		var adj = Math.sqrt(POPUP_SQUARE - pwsrs);
-		var f180 = -180 * fold;
-		var f180r = degToRad(f180);
-		var f180nr = degToRad((f180) - 90);
-
-		// origin
-		var p0 = [0, 0, 0];
-
-		// left piece: bottom outside
-		var p1 = [-adj * Math.cos(f180r), adj * Math.sin(f180r), pwsr];
-
-		// right piece: bottom outside
-		var p2 = [adj, 0, pwsr];
-
-		// left piece: top inside
-		var p3 = [-POPUP_WIDTH * Math.cos(f180nr), POPUP_WIDTH * Math.sin(f180nr), 0];
-
-
-		// normalize the vectors
-		var len = Math.sqrt(p1[0] * p1[0] + p1[1] * p1[1] + p1[2] * p1[2]);
-		var normV1 = $V([p1[0] / len, p1[1] / len, p1[2] / len]);
-		var normV2 = $V([p2[0] / len, p2[1] / len, p2[2] / len]);
-		var normV3 = $V([p3[0] / len, p3[1] / len, p3[2] / len]);
-
-		// calculate the cross vector
-		var cross = normV1.cross(normV2);
-		
-		// calculate the cross vector's angle from vector 3
-		var crossAngle = -radToDeg(cross.angleFrom(normV3)) - 90;
-		
-		// transform the shape
-		var transform = 'translateY(' + depth + 'px) rotateZ(' + zRot + 'deg) rotateX(' + crossAngle + 'deg)';
-		graphic.css(cssTransformProperty, transform);
-	}
+	// transform the shape
+	var transform = 'translateY(' + this.depth + 'px) rotateZ(' + this.zRot + 'deg) rotateX(' + crossAngle + 'deg)';
+	this.graphic.css(cssTransformProperty, transform);
 }
