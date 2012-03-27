@@ -507,18 +507,21 @@ function Popup(graphic, depth, event) {
 	
 	function setFold(fold) {
 		var adj = Math.sqrt(POPUP_SQUARE - pwsrs);
-		
+		var f180 = -180 * fold;
+		var f180r = degToRad(f180);
+		var f180nr = degToRad((f180) - 90);
+
 		// origin
 		var p0 = [0, 0, 0];
 
 		// left piece: bottom outside
-		var p1 = [-adj * Math.cos(degToRad(-180 * fold)), adj * Math.sin(degToRad(-180 * fold)), pwsr];
+		var p1 = [-adj * Math.cos(f180r), adj * Math.sin(f180r), pwsr];
 
 		// right piece: bottom outside
 		var p2 = [adj, 0, pwsr];
 
 		// left piece: top inside
-		var p3 = [-POPUP_WIDTH * Math.cos(degToRad((-180 * fold) - 90)), POPUP_WIDTH * Math.sin(degToRad((-180 * fold) - 90)), 0];
+		var p3 = [-POPUP_WIDTH * Math.cos(f180nr), POPUP_WIDTH * Math.sin(f180nr), 0];
 
 
 		// normalize the vectors
