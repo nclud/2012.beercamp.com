@@ -124,8 +124,12 @@ $document.ready(function () {
 function startDrag(e) {
 	e.preventDefault();
 	$book.css('cursor', '-webkit-grabbing');
-	$scene.data('offset', hasTouch ? e.originalEvent.touches[0].pageX : e.pageX);
-	$body.bind(dragMoveEvent, updateDrag);
+	var data = {
+		offset: hasTouch ? e.originalEvent.touches[0].pageX : e.pageX,
+		width: $body.width()
+	};
+
+	$body.bind(dragMoveEvent, data, updateDrag);
 	$body.bind(dragStopEvent, stopDrag);
 }
 
@@ -136,12 +140,11 @@ function updateDrag(e) {
 		$dragNotice.removeClass('shown');
 	}
 
-	var targetX = (hasTouch ? e.originalEvent.touches[0].pageX : e.pageX) - $scene.data('offset');
-	var per = targetX / $body.width() * 2.5;
+	var offset = e.data.offset;
+	var width = e.data.width;
+	var targetX = hasTouch ? e.originalEvent.touches[0].pageX : e.pageX - offset;
+	var per = clamp(targetX / width * 2.5, -1, 1);
 	var shouldBreak = false;
-
-	per = clamp(per, -1, 1);
-
 	var dir = per < 0 ? 'left' : 'right';
 
 	if (curPer + per < 0 && adjustedPer > 0) {
