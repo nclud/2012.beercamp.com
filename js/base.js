@@ -310,20 +310,20 @@ function zoomToHotspot(e) {
 	var indicator = hotspot.children('.indicator');
 
 	if (zoomedIn) {
-		setTimeout(function (e) {
+		setTimeout(function (hotspot) {
 			hotspot.removeClass('focused');
-		}, 1);
+		}, 1, hotspot);
 		$spreads.show();
 
 		adjustScene();
 
 		$body.bind(dragStartEvent, startDrag);
 
-		setTimeout(function (e) {
+		setTimeout(function ($scene) {
 			$scene.css(cssTransitionProperty, 'none');
 			$scene.unbind(domTransitionProperty);
-			$window.bind(rotationEvent, rotateScene);
-		}, 600);
+		}, 600, $scene);
+		$window.bind(rotationEvent, rotateScene);
 	} else {
 		hotspot.addClass('focused');
 		var thisSpread = hotspot.parents('.spread');
@@ -339,9 +339,9 @@ function zoomToHotspot(e) {
 
 		$scene.css(cssTransitionProperty, 'all .6s');
 
-		setTimeout(function () {
+		setTimeout(function ($body) {
 			$body.bind(selectionEvent, zoomToHotspot);
-		}, 1);
+		}, 1, $body);
 
 		var $spread = $spot.parents('.spread');
 		var scale = (1 - ((1 - curSceneScale) * 0.3));
