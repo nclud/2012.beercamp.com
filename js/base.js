@@ -29,7 +29,6 @@ var PAGE_TURN_SPEED       = 25,
 		'msTransition'     : 'MSTransitionEnd',
 		'transition'       : 'transitionend'
 	}[ domTransitionProperty ],
-	popups,
 	initialOrientation,
 	curPageIndex,
 	timer,
@@ -437,14 +436,11 @@ function clamp( val, min, max ){
 
 
 function craftThatPaperBaby() {
-	popups = [];
 	$('.popup').each(function (i) {
 		var $popup = $(this);
 		var master = $popup.parents('.spread');
 		var depth = $popup.attr('data-depth');
 		var popup = new Popup($popup, depth, paperFolding);
-
-		popups.push(popup);
 	});
 
 	$spreads.each(function (i) {
