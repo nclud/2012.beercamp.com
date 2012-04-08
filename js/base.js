@@ -1,5 +1,4 @@
 var PAGE_TURN_SPEED       = 25,
-	paperFolding          = 'pageFolding',
 	zoomedIn              = false,
 	curPageIndex          = 0,
 	curSceneScale         = 1,
@@ -17,6 +16,7 @@ var PAGE_TURN_SPEED       = 25,
 	hasMotion             = Modernizr.devicemotion,
 	hasOrientation        = Modernizr.deviceorientation,
 	has3d                 = Modernizr.csstransforms3d,
+	foldingEvent          = 'pageFolding',
 	rotationEvent         = (hasTouch && hasOrientation) ? 'deviceorientation' : 'mousemove',
 	dragStartEvent        = hasTouch ? 'touchstart' : 'mousedown',
 	dragMoveEvent         = hasTouch ? 'touchmove' : 'mousemove',
@@ -163,8 +163,8 @@ function updateDrag(e) {
 		$leftPage.find('.page-right').css(cssTransformProperty, rightTransform);
 		$rightPage.find('.page-left').css(cssTransformProperty, leftTransform);
 
-		$leftPage.trigger(paperFolding, adjustedPer < 0 ? absPer : 1 - absPer);
-		$rightPage.trigger(paperFolding, adjustedPer < 0 ? 1 - absPer : absPer);
+		$leftPage.trigger(foldingEvent, adjustedPer < 0 ? absPer : 1 - absPer);
+		$rightPage.trigger(foldingEvent, adjustedPer < 0 ? 1 - absPer : absPer);
 
 		toggleVisibles(absPer * 180, adjustedPer < 0 ? curPageIndex : curPageIndex - 1);
 	} else {
@@ -173,8 +173,8 @@ function updateDrag(e) {
 		$leftPage.find('.page-right').css(cssTransformProperty, rightTransform);
 		$rightPage.find('.page-left').css(cssTransformProperty, leftTransform);
 
-		$leftPage.trigger(paperFolding, dir == 'right' ? absPer : 1 - absPer);
-		$rightPage.trigger(paperFolding, dir == 'right' ? 1 - absPer : absPer);
+		$leftPage.trigger(foldingEvent, dir == 'right' ? absPer : 1 - absPer);
+		$rightPage.trigger(foldingEvent, dir == 'right' ? 1 - absPer : absPer);
 
 		toggleVisibles(absPer * 180, dir == 'right' ? curPageIndex : curPageIndex - 1);
 	}
@@ -440,7 +440,7 @@ function craftThatPaperBaby() {
 		var $popup = $(this);
 		var master = $popup.parents('.spread');
 		var depth = $popup.attr('data-depth');
-		var popup = new Popup($popup, depth, paperFolding);
+		var popup = new Popup($popup, depth, foldingEvent);
 	});
 
 	$spreads.each(function (i) {
@@ -477,7 +477,7 @@ function Popup(graphic, depth, event) {
 	;
 
 	var onFold = function (e, per) { this.setFold(per); }.bind(this);
-	graphic.parents('.spread').bind(paperFolding, onFold);
+	graphic.parents('.spread').bind(foldingEvent, onFold);
 	this.setFold(1);
 }
 
