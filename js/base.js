@@ -1,19 +1,38 @@
-var popups,
-	paperFolding = 'pageFolding',
+var PAGE_TURN_SPEED       = 25,
+	paperFolding          = 'pageFolding',
+	zoomedIn              = false,
+	curPageIndex          = 0,
+	curSceneScale         = 1,
+	curRotX               = -15,
+	curRotY               = 0,
+	curPer                = 0,
+	adjustedPer           = 0,
+	numTouches            = 0,
+	bgColors              = ['#3272ad', '#ae0039', '#50326d', '#355506', '#3272ad'],
+	domTransformProperty  = Modernizr.prefixed('transform'),
+	cssTransformProperty  = domToCss(domTransformProperty),
+	domTransitionProperty = Modernizr.prefixed('transition'),
+	cssTransitionProperty = domToCss(domTransitionProperty),
+	hasTouch              = Modernizr.touch,
+	hasMotion             = Modernizr.devicemotion,
+	hasOrientation        = Modernizr.deviceorientation,
+	has3d                 = Modernizr.csstransforms3d,
+	rotationEvent         = (hasTouch && hasOrientation) ? 'deviceorientation' : 'mousemove',
+	dragStartEvent        = hasTouch ? 'touchstart' : 'mousedown',
+	dragMoveEvent         = hasTouch ? 'touchmove' : 'mousemove',
+	dragStopEvent         = hasTouch ? 'touchend' : 'mouseup',
+	selectionEvent        = hasTouch ? 'touchend' : 'click',
+	transitionEndEvent    = {
+		'WebkitTransition' : 'webkitTransitionEnd',
+		'MozTransition'    : 'transitionend',
+		'OTransition'      : 'oTransitionEnd',
+		'msTransition'     : 'MSTransitionEnd',
+		'transition'       : 'transitionend'
+	}[ domTransitionProperty ],
+	popups,
+	initialOrientation,
 	curPageIndex,
 	timer,
-	zoomedIn,
-	curSceneScale,
-	curRotX,
-	curRotY,
-	curPer,
-	curDir,
-	adjustedPer,
-	bgColors,
-	domTransformProperty,
-	cssTransformProperty,
-	domTransitionProperty,
-	cssTransitionProperty,
 	$leftPage,
 	$rightPage,
 	$document = $(document),
@@ -23,26 +42,8 @@ var popups,
 	$book,
 	$spreads,
 	$dragNotice,
-	$hotSpots,
-	hasTouch,
-	hasMotion,
-	hasOrientation,
-	numTouches,
-	rotationEvent,
-	dragStartEvent,
-	dragMoveEvent,
-	dragStopEvent,
-	selectionEvent,
-	transitionEndEvents = {
-		'WebkitTransition' : 'webkitTransitionEnd',
-		'MozTransition'    : 'transitionend',
-		'OTransition'      : 'oTransitionEnd',
-		'msTransition'     : 'MSTransitionEnd',
-		'transition'       : 'transitionend'
-	},
-	transitionEndEvent,
-	initialOrientation,
-	PAGE_TURN_SPEED = 25;
+	$hotSpots
+;
 
 
 
@@ -59,35 +60,12 @@ var popups,
 
 $document.ready(function () {
 
-	curPageIndex = 0;
-	curSceneScale = 1;
-	curRotX = -15;
-	curRotY = 0;
-	curPer = adjustedPer = 0;
-	zoomedIn = false;
-	curRotX = -15;
-	numTouches = 0;
-	domTransformProperty = Modernizr.prefixed('transform');
-	cssTransformProperty = domToCss(domTransformProperty);
-	domTransitionProperty = Modernizr.prefixed('transition');
-	cssTransitionProperty = domToCss(domTransitionProperty);
-	bgColors = ['#3272ad', '#ae0039', '#50326d', '#355506', '#3272ad'];
-	$body = $('body');
-	$scene = $('.scene');
-	$book = $('.book');
-	$spreads = $('.spread');
+	$body       = $('body');
+	$scene      = $('.scene');
+	$book       = $('.book');
+	$spreads    = $('.spread');
 	$dragNotice = $('.drag-notice');
-	$hotSpots = $('.hotspot');
-	hasTouch = Modernizr.touch;
-	hasMotion = Modernizr.devicemotion;
-	hasOrientation = Modernizr.deviceorientation;
-	rotationEvent = (hasTouch && hasOrientation) ? 'deviceorientation' : 'mousemove';
-	dragStartEvent = hasTouch ? 'touchstart' : 'mousedown';
-	dragMoveEvent = hasTouch ? 'touchmove' : 'mousemove';
-	dragStopEvent = hasTouch ? 'touchend' : 'mouseup';
-	selectionEvent = hasTouch ? 'touchend' : 'click';
-	transitionEndEvent = transitionEndEvents[ domTransitionProperty ];
-	has3d = Modernizr.csstransforms3d;
+	$hotSpots   = $('.hotspot');
 
 	if (has3d) {
 		craftThatPaperBaby();
