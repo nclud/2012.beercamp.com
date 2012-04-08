@@ -117,20 +117,20 @@ function updateDrag(e) {
 		$dragNotice.removeClass('shown');
 	}
 
-	var offset = e.data.offset;
-	var width = e.data.width;
-	var targetX = hasTouch ? e.originalEvent.touches[0].pageX : e.pageX - offset;
-	var per = clamp(targetX / width * 2.5, -1, 1);
+	var offset      = e.data.offset;
+	var width       = e.data.width;
+	var targetX     = hasTouch ? e.originalEvent.touches[0].pageX : e.pageX - offset;
+	var per         = clamp(targetX / width * 2.5, -1, 1);
 	var shouldBreak = false;
-	var dir = per < 0 ? 'left' : 'right';
+	var dir         = per < 0 ? 'left' : 'right';
 
 	if (curPer + per < 0 && adjustedPer > 0) {
 		shouldBreak = true;
-		curPer = adjustedPer = 0;
+		curPer      = adjustedPer = 0;
 		stopDrag();
 	} else if (curPer + per > 0 && adjustedPer < 0) {
 		shouldBreak = true;
-		curPer = adjustedPer = 0;
+		curPer      = adjustedPer = 0;
 		stopDrag();
 	} else {
 		adjustedPer = clamp(curPer + per, -1, 1);
@@ -156,10 +156,10 @@ function updateDrag(e) {
 	var leftTransform;
 	var rightTransform;
 	if (!shouldBreak) {
-		$leftPage = adjustedPer < 0 ? $spreads.eq( curPageIndex ) : $spreads.eq( curPageIndex - 1 );
-		$rightPage = adjustedPer < 0 ? $spreads.eq(curPageIndex + 1) : $spreads.eq(curPageIndex);
+		$leftPage      = adjustedPer < 0 ? $spreads.eq( curPageIndex ) : $spreads.eq( curPageIndex - 1 );
+		$rightPage     = adjustedPer < 0 ? $spreads.eq(curPageIndex + 1) : $spreads.eq(curPageIndex);
 		rightTransform = 'rotateY(' + (-180 * (adjustedPer < 0 ? absPer : 1 - absPer)) + 'deg)';
-		leftTransform = 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)';
+		leftTransform  = 'rotateY(' + (180 * (adjustedPer < 0 ? 1 - absPer : absPer)) + 'deg)';
 		$leftPage.find('.page-right').css(cssTransformProperty, rightTransform);
 		$rightPage.find('.page-left').css(cssTransformProperty, leftTransform);
 
@@ -169,7 +169,7 @@ function updateDrag(e) {
 		toggleVisibles(absPer * 180, adjustedPer < 0 ? curPageIndex : curPageIndex - 1);
 	} else {
 		rightTransform = 'rotateY(' + (-180 * (dir == 'right' ? absPer : 1 - absPer)) + 'deg)';
-		leftTransform = 'rotateY(' + (180 * (dir == 'right' ? 1 - absPer : absPer)) + 'deg)';
+		leftTransform  = 'rotateY(' + (180 * (dir == 'right' ? 1 - absPer : absPer)) + 'deg)';
 		$leftPage.find('.page-right').css(cssTransformProperty, rightTransform);
 		$rightPage.find('.page-left').css(cssTransformProperty, leftTransform);
 
@@ -181,12 +181,12 @@ function updateDrag(e) {
 
 	$spreads.each(function (i) {
 		var anglePerPage = 180 / 9;
-		var offsetIndex = adjustedPer < 0 ? 5 + curPageIndex - i : 5 + curPageIndex - i - 2;
-		var offsetAngle = adjustedPer < 0 ? offsetIndex - adjustedPer - 1 : offsetIndex - adjustedPer + 1;
-		var rads = degToRad(offsetAngle * anglePerPage + 10);
-		var tarX = 5 * Math.cos(rads);
-		var tarZ = 5 * Math.sin(rads);
-		var transform = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
+		var offsetIndex  = adjustedPer < 0 ? 5 + curPageIndex - i : 5 + curPageIndex - i - 2;
+		var offsetAngle  = adjustedPer < 0 ? offsetIndex - adjustedPer - 1 : offsetIndex - adjustedPer + 1;
+		var rads         = degToRad(offsetAngle * anglePerPage + 10);
+		var tarX         = 5 * Math.cos(rads);
+		var tarZ         = 5 * Math.sin(rads);
+		var transform    = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
 		$(this).css(cssTransformProperty, transform);
 	});
 
@@ -218,7 +218,7 @@ function stopDrag(e) {
 }
 
 function toggleVisibles(per, leftIndex) {
-	var curPage = $spreads.eq( curPageIndex );
+	var curPage  = $spreads.eq( curPageIndex );
 	var nextPage = $spreads.eq(curPageIndex + 1);
 	var prevPage = $spreads.eq(curPageIndex - 1);
 
@@ -281,10 +281,10 @@ function zoomToHotspot(e) {
 
 	$body.unbind(selectionEvent);
 	$window.unbind(rotationEvent);
-	var $spot = $(this);
+	var $spot        = $(this);
 	var $focusedSpot = $hotSpots.filter('.focused');
-	var hotspot = $focusedSpot.length > 0 ? $focusedSpot : $spot;
-	var indicator = hotspot.children('.indicator');
+	var hotspot      = $focusedSpot.length > 0 ? $focusedSpot : $spot;
+	var indicator    = hotspot.children('.indicator');
 
 	if (zoomedIn) {
 		setTimeout(function (hotspot) {
@@ -320,8 +320,8 @@ function zoomToHotspot(e) {
 			$body.bind(selectionEvent, zoomToHotspot);
 		}, 1, $body);
 
-		var $spread = $spot.parents('.spread');
-		var scale = (1 - ((1 - curSceneScale) * 0.3));
+		var $spread        = $spot.parents('.spread');
+		var scale          = (1 - ((1 - curSceneScale) * 0.3));
 		var scaleTransform = 'scale3d(' + scale + ', ' + scale + ', ' + scale + ')';
 		var translateTransform;
 		var spreadTransform;
@@ -356,10 +356,10 @@ function zoomToHotspot(e) {
 
 
 function rotateScene(e) {
-	var o = e.originalEvent;
+	var o     = e.originalEvent;
 	var theta = (Math.abs(window.orientation) == 90) ? o.beta : o.gamma;
-	curRotY = e.type === 'deviceorientation' ? 0 + (15 * (theta / -45)) : -15 + (30 * e.pageX / $body.width());
-	curRotX = -15;
+	curRotY   = e.type === 'deviceorientation' ? 0 + (15 * (theta / -45)) : -15 + (30 * e.pageX / $body.width());
+	curRotX   = -15;
 
 	adjustScene();
 }
@@ -439,18 +439,18 @@ function craftThatPaperBaby() {
 	$('.popup').each(function (i) {
 		var $popup = $(this);
 		var master = $popup.parents('.spread');
-		var depth = $popup.attr('data-depth');
-		var popup = new Popup($popup, depth, foldingEvent);
+		var depth  = $popup.attr('data-depth');
+		var popup  = new Popup($popup, depth, foldingEvent);
 	});
 
 	$spreads.each(function (i) {
-		var anglePerPage = 180 / 9;
-		var offsetIndex = 5 + curPageIndex - i;
-		var offsetAngle = offsetIndex - 1;
-		var rads = degToRad(offsetAngle * anglePerPage + 10);
-		var tarX = 5 * Math.cos(rads);
-		var tarZ = 5 * Math.sin(rads);
-		var $spread = $(this);
+		var anglePerPage  = 180 / 9;
+		var offsetIndex   = 5 + curPageIndex - i;
+		var offsetAngle   = offsetIndex - 1;
+		var rads          = degToRad(offsetAngle * anglePerPage + 10);
+		var tarX          = 5 * Math.cos(rads);
+		var tarZ          = 5 * Math.sin(rads);
+		var $spread       = $(this);
 		var pageTransform = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
 		$spread.css(cssTransformProperty, pageTransform);
 	});
@@ -467,13 +467,13 @@ function hideLocationBar() {
 
 function Popup(graphic, depth, event) {
 	if (!event) event = 'pageFolding';
-	this.graphic = graphic;
-	this.depth = depth;
-	this.zRot = graphic.parents('.page').hasClass('page-left') ? 15 : -15;
-	this.POPUP_WIDTH = 300;
+	this.graphic      = graphic;
+	this.depth        = depth;
+	this.zRot         = graphic.parents('.page').hasClass('page-left') ? 15 : -15;
+	this.POPUP_WIDTH  = 300;
 	this.POPUP_SQUARE = this.POPUP_WIDTH * this.POPUP_WIDTH;
-	this.pwsr = this.POPUP_WIDTH * Math.sin(degToRad(-15));
-	this.pwsrs = this.pwsr * this.pwsr
+	this.pwsr         = this.POPUP_WIDTH * Math.sin(degToRad(-15));
+	this.pwsrs        = this.pwsr * this.pwsr
 	;
 
 	var onFold = function (e, per) { this.setFold(per); }.bind(this);
@@ -483,9 +483,9 @@ function Popup(graphic, depth, event) {
 
 Popup.prototype.setFold = function (fold) {
 	fold = clamp(fold, 0);
-	var adj = Math.sqrt(this.POPUP_SQUARE - this.pwsrs);
-	var f180 = -180 * fold;
-	var f180r = degToRad(f180);
+	var adj    = Math.sqrt(this.POPUP_SQUARE - this.pwsrs);
+	var f180   = -180 * fold;
+	var f180r  = degToRad(f180);
 	var f180nr = degToRad((f180) - 90);
 
 	// origin
@@ -502,7 +502,7 @@ Popup.prototype.setFold = function (fold) {
 
 
 	// normalize the vectors
-	var len = Math.sqrt(p1[0] * p1[0] + p1[1] * p1[1] + p1[2] * p1[2]);
+	var len    = Math.sqrt(p1[0] * p1[0] + p1[1] * p1[1] + p1[2] * p1[2]);
 	var normV1 = $V([p1[0] / len, p1[1] / len, p1[2] / len]);
 	var normV2 = $V([p2[0] / len, p2[1] / len, p2[2] / len]);
 	var normV3 = $V([p3[0] / len, p3[1] / len, p3[2] / len]);
@@ -516,4 +516,4 @@ Popup.prototype.setFold = function (fold) {
 	// transform the shape
 	var transform = 'translateY(' + this.depth + 'px) rotateZ(' + this.zRot + 'deg) rotateX(' + crossAngle + 'deg)';
 	this.graphic.css(cssTransformProperty, transform);
-}
+};
