@@ -72,10 +72,17 @@ $document.ready(function () {
 				'width': '220px'
 			});
 		}
+
 		$window.bind(rotationEvent, rotateScene);
 		$window.bind('resize', resizeScene);
 		$body.bind(dragStartEvent, startDrag);
-		$hotSpots.bind(selectionEvent, zoomToHotspot);
+		$body.on(selectionEvent, $hotSpots.selector, zoomToHotspot);
+		// Sometimes, when zoomed in, the click target is `body`; not a hotspot
+		$body.on(selectionEvent, function (e) {
+			if (zoomedIn && e.target == e.currentTarget) {
+				zoomToHotspot(e);
+			}
+		});
 
 		resizeScene();
 		adjustScene();
@@ -209,8 +216,8 @@ function updateDrag(e) {
 function stopDrag(e) {
 	curDir = null;
 	curPer = adjustedPer;
-	$body.unbind(dragMoveEvent);
-	$body.unbind(dragStopEvent);
+	$body.unbind(dragMoveEvent, updateDrag);
+	$body.unbind(dragStopEvent, stopDrag);
 	$book.css('cursor', '-webkit-grab');
 }
 
@@ -274,29 +281,21 @@ function toggleVisibles(per, leftIndex) {
 
 
 function zoomToHotspot(e) {
+
 	e.preventDefault();
 
-	$body.unbind(selectionEvent);
-	$window.unbind(rotationEvent);
 	var $spot        = $(this);
 	var $focusedSpot = $hotSpots.filter('.focused');
 	var hotspot      = $focusedSpot.length > 0 ? $focusedSpot : $spot;
 	var indicator    = hotspot.children('.indicator');
 
 	if (zoomedIn) {
-		setTimeout(function (hotspot) {
-			hotspot.removeClass('focused');
-		}, 1, hotspot);
-		$spreads.show();
 
+		hotspot.removeClass('focused');
+		$spreads.show();
 		adjustScene();
 
 		$body.bind(dragStartEvent, startDrag);
-
-		setTimeout(function ($scene) {
-			$scene.css(cssTransitionProperty, 'none');
-			$scene.unbind(domTransitionProperty);
-		}, 600, $scene);
 		$window.bind(rotationEvent, rotateScene);
 	} else {
 		hotspot.addClass('focused');
@@ -307,15 +306,10 @@ function zoomToHotspot(e) {
 			'margin-top': indicator.attr('data-offsetY') + 'px'
 		});
 
-		$body.unbind(dragStartEvent);
+		$body.unbind(dragStartEvent, startDrag);
 		$window.unbind(rotationEvent, rotateScene);
-		$body.unbind(dragMoveEvent);
 
 		$scene.css(cssTransitionProperty, 'all .6s');
-
-		setTimeout(function ($body) {
-			$body.bind(selectionEvent, zoomToHotspot);
-		}, 1, $body);
 
 		var $spread        = $spot.parents('.spread');
 		var scale          = (1 - ((1 - curSceneScale) * 0.3));
@@ -470,8 +464,7 @@ function Popup(graphic, depth, event) {
 	this.POPUP_WIDTH  = 300;
 	this.POPUP_SQUARE = this.POPUP_WIDTH * this.POPUP_WIDTH;
 	this.pwsr         = this.POPUP_WIDTH * Math.sin(degToRad(-15));
-	this.pwsrs        = this.pwsr * this.pwsr
-	;
+	this.pwsrs        = this.pwsr * this.pwsr;
 
 	var onFold = function (e, per) { this.setFold(per); }.bind(this);
 	graphic.parents('.spread').bind(foldingEvent, onFold);
