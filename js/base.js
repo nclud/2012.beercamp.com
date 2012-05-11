@@ -117,9 +117,7 @@ function startDrag(e) {
 function updateDrag(e) {
 	e.preventDefault();
 
-	if ($dragNotice.hasClass('shown')) {
-		$dragNotice.removeClass('shown');
-	}
+	$dragNotice.removeClass('shown');
 
 	var offset      = e.data.offset;
 	var width       = e.data.width;
@@ -194,16 +192,23 @@ function updateDrag(e) {
 		$(this).css(cssTransformProperty, transform);
 	});
 
-	var bookTransform;
+	var rotateTransform;
+	var translateTransform;
 	if (curPageIndex == 0) {
-		bookTransform = 'translateX(' + (-300 + (300 * absPer)) + 'px) rotateX(' + (29 + (61 * absPer)) + 'deg) rotateZ(' + (-8 + (8 * absPer)) + 'deg) translateZ(' + (100 - (100 * absPer)) + 'px)';
+		rotateTransform = 'rotateX(' + (29 + (61 * absPer)) + 'deg) rotateZ(' + (-8 + (8 * absPer)) + 'deg)';
+		translateTransform = 'translateX(' + (-300 + (300 * absPer)) + 'px) translateZ(' + (100 - (100 * absPer)) + 'px)';
 	} else if (curPageIndex == 1 && adjustedPer > 0) {
-		bookTransform = 'translateX(' + (-300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px)';
+		rotateTransform = 'rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg)';
+		translateTransform = 'translateX(' + (-300 * absPer) + 'px) translateZ(' + (100 * absPer) + 'px)';
 	} else if (curPageIndex == 3 && adjustedPer < 0) {
-		bookTransform = 'translateX(' + (300 * absPer) + 'px) rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg) translateZ(' + (100 * absPer) + 'px) translateY(' + (-120 * absPer) + 'px)';
+		rotateTransform = 'rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg)';
+		bookTransform = 'translateX(' + (300 * absPer) + 'px) translateZ(' + (100 * absPer) + 'px) translateY(' + (-120 * absPer) + 'px)';
 	} else if (curPageIndex == 4) {
-		bookTransform = 'translateX(' + (300 - (300 * adjustedPer)) + 'px) rotateX(' + (29 + (61 * adjustedPer)) + 'deg) rotateZ(' + (-8 + (8 * adjustedPer)) + 'deg) translateZ(' + (100 - (100 * adjustedPer)) + 'px) translateY(' + (-120 + (120 * adjustedPer)) + 'px)';
+		rotateTransform = 'rotateX(' + (29 + (61 * adjustedPer)) + 'deg) rotateZ(' + (-8 + (8 * adjustedPer)) + 'deg)';
+		translateTransform = 'translateX(' + (300 - (300 * adjustedPer)) + 'px) translateZ(' + (100 - (100 * adjustedPer)) + 'px) translateY(' + (-120 + (120 * adjustedPer)) + 'px)';
 	}
+
+	var bookTransform = translateTransform + ' ' + rotateTransform;
 	$book.css(cssTransformProperty, bookTransform);
 
 	if (absPer >= 1) {
@@ -311,19 +316,21 @@ function zoomToHotspot(e) {
 
 		$scene.css(cssTransitionProperty, 'all .6s');
 
-		var $spread        = $spot.parents('.spread');
-		var scale          = (1 - ((1 - curSceneScale) * 0.3));
-		var scaleTransform = 'scale3d(' + scale + ', ' + scale + ', ' + scale + ')';
+		var $spread         = $spot.parents('.spread');
+		var scale           = (1 - ((1 - curSceneScale) * 0.3));
+		var scaleTransform  = 'scale3d(' + scale + ', ' + scale + ', ' + scale + ')';
+		var rotateTransform = 'rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
+
 		var translateTransform;
-		var spreadTransform;
 		if ($spread.hasClass('intro')) {
-			translateTransform = 'translateY(-200px) translateX(400px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
+			translateTransform = 'translate3d(400px, -200px, 400px)';
 		} else if ($spread.hasClass('location')) {
-			translateTransform = 'translateY(-150px) translateX(-330px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
+			translateTransform = 'translate3d(-330px, -150px, 400px)';
 		} else if ($spread.hasClass('music')) {
-			translateTransform = 'translateY(-200px) translateX(315px) translateZ(400px) rotateX(-90deg) rotateY(5deg) rotateZ(1deg)';
+			translateTransform = 'translate3d(315px, -200px, 400px)';
 		}
-		spreadTransform = scaleTransform + ' ' + translateTransform;
+
+		var spreadTransform = [scaleTransform, translateTransform, rotateTransform].join(' ');
 		$scene.css(cssTransformProperty, spreadTransform);
 	}
 
