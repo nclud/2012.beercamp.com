@@ -208,8 +208,10 @@ function updateDrag(e) {
 		translateTransform = 'translate3d(' + (300 - (300 * adjustedPer)) + 'px, ' + (-120 + (120 * adjustedPer)) + 'px, ' + (100 - (100 * adjustedPer)) + 'px)';
 	}
 
-	var bookTransform = translateTransform + ' ' + rotateTransform;
-	$book.css(cssTransformProperty, bookTransform);
+	if (translateTransform && rotateTransform) {
+		var bookTransform = translateTransform + ' ' + rotateTransform;
+		$book.css(cssTransformProperty, bookTransform);
+	}
 
 	if (absPer >= 1) {
 		adjustedPer < 0 ? curPageIndex++ : curPageIndex--;
