@@ -472,15 +472,19 @@ function hideLocationBar() {
 function Popup(graphic, depth, event) {
 	if (!event) event = 'pageFolding';
 	this.graphic      = graphic;
-	this.depth        = depth;
-	this.zRot         = graphic.parents('.page').hasClass('page-left') ? 15 : -15;
 	this.POPUP_WIDTH  = 300;
 	this.POPUP_SQUARE = this.POPUP_WIDTH * this.POPUP_WIDTH;
 	this.pwsr         = this.POPUP_WIDTH * Math.sin(degToRad(-15));
 	this.pwsrs        = this.pwsr * this.pwsr;
+	this.transforms   = {};
 
 	var onFold = function (e, per) { this.setFold(per); }.bind(this);
 	graphic.parents('.spread').bind(foldingEvent, onFold);
+
+	var zRot = graphic.parents('.page').hasClass('page-left') ? 15 : -15;
+	this.transforms.tY = 'translateY(' + depth + 'px)';
+	this.transforms.rZ = 'rotateZ(' + zRot + 'deg)';
+
 	this.setFold(1);
 }
 
@@ -517,8 +521,7 @@ Popup.prototype.setFold = function (fold) {
 	var crossAngle = -radToDeg(cross.angleFrom(normV3)) - 90;
 
 	// transform the shape
-	var translateTransform = 'translateY(' + this.depth + 'px)';
-	var rotateTransform = 'rotateZ(' + this.zRot + 'deg) rotateX(' + crossAngle + 'deg)';
-	var transform = [translateTransform, rotateTransform].join(' ');
+	var rX = 'rotateX(' + crossAngle + 'deg)';
+	var transform = [this.transforms.tY, this.transforms.rZ, rX].join(' ');
 	this.graphic.css(cssTransformProperty, transform);
 };
