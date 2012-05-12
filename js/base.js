@@ -64,7 +64,6 @@ $document.ready(function () {
 	$hotSpots   = $('.hotspot');
 
 	if (has3d) {
-		hideLocationBar();
 		craftThatPaperBaby();
 		if (hasTouch) {
 			hideLocationBar();
@@ -375,6 +374,7 @@ function adjustScene() {
 }
 
 function resizeScene(e) {
+	hideLocationBar();
 	var curW = $body.width();
 	var curH = $body.height();
 	var maxW = 1670;
