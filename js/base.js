@@ -365,7 +365,11 @@ function rotateScene(e) {
 }
 
 function adjustScene() {
-	var sceneTransform = 'scale3d(' + curSceneScale + ', ' + curSceneScale + ', ' + curSceneScale + ') translateY(100px) rotateX(' + curRotX + 'deg) rotateY(' + curRotY + 'deg)';
+	var scaleTransform = 'scale3d(' + curSceneScale + ', ' + curSceneScale + ', ' + curSceneScale + ')';
+	var rotateTransform = 'rotateX(' + curRotX + 'deg) rotateY(' + curRotY + 'deg)';
+	var translateTransform = 'translateY(100px)';
+	var sceneTransform =  [scaleTransform, rotateTransform, translateTransform].join(' ');
+
 	$scene.css(cssTransformProperty, sceneTransform);
 }
 
@@ -508,10 +512,10 @@ Popup.prototype.setFold = function (fold) {
 
 	// calculate the cross vector
 	var cross = normV1.cross(normV2);
-	
+
 	// calculate the cross vector's angle from vector 3
 	var crossAngle = -radToDeg(cross.angleFrom(normV3)) - 90;
-	
+
 	// transform the shape
 	var transform = 'translateY(' + this.depth + 'px) rotateZ(' + this.zRot + 'deg) rotateX(' + crossAngle + 'deg)';
 	this.graphic.css(cssTransformProperty, transform);
