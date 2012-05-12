@@ -517,6 +517,8 @@ Popup.prototype.setFold = function (fold) {
 	var crossAngle = -radToDeg(cross.angleFrom(normV3)) - 90;
 
 	// transform the shape
-	var transform = 'translateY(' + this.depth + 'px) rotateZ(' + this.zRot + 'deg) rotateX(' + crossAngle + 'deg)';
+	var translateTransform = 'translateY(' + this.depth + 'px)';
+	var rotateTransform = 'rotateZ(' + this.zRot + 'deg) rotateX(' + crossAngle + 'deg)';
+	var transform = [translateTransform, rotateTransform].join(' ');
 	this.graphic.css(cssTransformProperty, transform);
 };
