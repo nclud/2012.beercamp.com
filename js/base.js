@@ -202,7 +202,7 @@ function updateDrag(e) {
 		translateTransform = 'translate3d(' + (-300 * absPer) + 'px, 0, ' + (100 * absPer) + 'px)';
 	} else if (curPageIndex == 3 && adjustedPer < 0) {
 		rotateTransform = 'rotateX(' + (90 - (61 * absPer)) + 'deg) rotateZ(' + (-8 * absPer) + 'deg)';
-		bookTransform = 'translate3d(' + (300 * absPer) + 'px, ' + (-120 * absPer) + 'px, ' + (100 * absPer) + 'px)';
+		translateTransform = 'translate3d(' + (300 * absPer) + 'px, ' + (-120 * absPer) + 'px, ' + (100 * absPer) + 'px)';
 	} else if (curPageIndex == 4) {
 		rotateTransform = 'rotateX(' + (29 + (61 * adjustedPer)) + 'deg) rotateZ(' + (-8 + (8 * adjustedPer)) + 'deg)';
 		translateTransform = 'translate3d(' + (300 - (300 * adjustedPer)) + 'px, ' + (-120 + (120 * adjustedPer)) + 'px, ' + (100 - (100 * adjustedPer)) + 'px)';
