@@ -365,10 +365,10 @@ function rotateScene(e) {
 }
 
 function adjustScene() {
-	var scaleTransform = 'scale3d(' + curSceneScale + ', ' + curSceneScale + ', ' + curSceneScale + ')';
-	var rotateTransform = 'rotateX(' + curRotX + 'deg) rotateY(' + curRotY + 'deg)';
+	var scaleTransform     = 'scale3d(' + curSceneScale + ', ' + curSceneScale + ', ' + curSceneScale + ')';
+	var rotateTransform    = 'rotateX(' + curRotX + 'deg) rotateY(' + curRotY + 'deg)';
 	var translateTransform = 'translateY(100px)';
-	var sceneTransform =  [scaleTransform, rotateTransform, translateTransform].join(' ');
+	var sceneTransform     =  [scaleTransform, rotateTransform, translateTransform].join(' ');
 
 	$scene.css(cssTransformProperty, sceneTransform);
 }
