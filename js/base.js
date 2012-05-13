@@ -286,6 +286,10 @@ function toggleVisibles(per, leftIndex) {
 
 ****************************/
 
+function onTransitionEnd() {
+	$scene.css(cssTransitionProperty, 'none');
+	$window.bind(rotationEvent, rotateScene);
+}
 
 function zoomToHotspot(e) {
 
@@ -303,7 +307,7 @@ function zoomToHotspot(e) {
 		adjustScene();
 
 		$body.bind(dragStartEvent, startDrag);
-		$window.bind(rotationEvent, rotateScene);
+		$scene.bind(transitionEndEvent, onTransitionEnd);
 	} else {
 		hotspot.addClass('focused');
 		var thisSpread = hotspot.parents('.spread');
@@ -315,6 +319,7 @@ function zoomToHotspot(e) {
 
 		$body.unbind(dragStartEvent, startDrag);
 		$window.unbind(rotationEvent, rotateScene);
+		$scene.unbind(transitionEndEvent, onTransitionEnd);
 
 		$scene.css(cssTransitionProperty, 'all .6s');
 
