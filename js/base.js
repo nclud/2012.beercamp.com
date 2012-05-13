@@ -103,6 +103,7 @@ $document.ready(function () {
 ****************************/
 
 function startDrag(e) {
+	if (zoomedIn) return;
 	e.preventDefault();
 	$book.css('cursor', '-webkit-grabbing');
 	var data = {
@@ -288,7 +289,6 @@ function toggleVisibles(per, leftIndex) {
 
 function onTransitionEnd() {
 	$scene.css(cssTransitionProperty, 'none');
-	$window.bind(rotationEvent, rotateScene);
 }
 
 function zoomToHotspot(e) {
@@ -306,7 +306,6 @@ function zoomToHotspot(e) {
 		$spreads.show();
 		adjustScene();
 
-		$body.bind(dragStartEvent, startDrag);
 		$scene.bind(transitionEndEvent, onTransitionEnd);
 	} else {
 		hotspot.addClass('focused');
@@ -317,8 +316,6 @@ function zoomToHotspot(e) {
 			'margin-top': indicator.attr('data-offsetY') + 'px'
 		});
 
-		$body.unbind(dragStartEvent, startDrag);
-		$window.unbind(rotationEvent, rotateScene);
 		$scene.unbind(transitionEndEvent, onTransitionEnd);
 
 		$scene.css(cssTransitionProperty, 'all .6s');
@@ -361,6 +358,7 @@ function zoomToHotspot(e) {
 
 
 function rotateScene(e) {
+	if (zoomedIn) return;
 	var o     = e.originalEvent;
 	var theta = (Math.abs(window.orientation) == 90) ? o.beta : o.gamma;
 	curRotY   = e.type === 'deviceorientation' ? 0 + (15 * (theta / -45)) : -15 + (30 * e.pageX / $body.width());
