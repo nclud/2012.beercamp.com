@@ -76,11 +76,11 @@ $document.ready(function () {
 		$window.bind(rotationEvent, rotateScene);
 		$window.bind('resize', resizeScene);
 		$body.bind(dragStartEvent, startDrag);
-		$body.on(selectionEvent, $hotSpots.selector, zoomToHotspot);
+		$body.on(selectionEvent, $hotSpots.selector, onHotspotSelected);
 		// Sometimes, when zoomed in, the click target is `body`; not a hotspot
 		$body.on(selectionEvent, function (e) {
 			if (zoomedIn && e.target == e.currentTarget) {
-				zoomToHotspot(e);
+				onHotspotSelected(e);
 			}
 		});
 
@@ -287,11 +287,12 @@ function toggleVisibles(per, leftIndex) {
 
 ****************************/
 
-function onTransitionEnd() {
+function onZoomOut() {
 	$scene.css(cssTransitionProperty, 'none');
+	zoomedIn = false;
 }
 
-function zoomToHotspot(e) {
+function onHotspotSelected(e) {
 
 	e.preventDefault();
 
@@ -302,11 +303,11 @@ function zoomToHotspot(e) {
 
 	if (zoomedIn) {
 
+		$scene.bind(transitionEndEvent, onZoomOut);
 		hotspot.removeClass('focused');
 		$spreads.show();
 		adjustScene();
 
-		$scene.bind(transitionEndEvent, onTransitionEnd);
 	} else {
 		hotspot.addClass('focused');
 		var thisSpread = hotspot.parents('.spread');
@@ -316,9 +317,9 @@ function zoomToHotspot(e) {
 			'margin-top': indicator.attr('data-offsetY') + 'px'
 		});
 
-		$scene.unbind(transitionEndEvent, onTransitionEnd);
-
+		$scene.unbind(transitionEndEvent, onZoomOut);
 		$scene.css(cssTransitionProperty, 'all .6s');
+		zoomedIn = true;
 
 		var $spread         = $spot.parents('.spread');
 		var scale           = (1 - ((1 - curSceneScale) * 0.3));
@@ -337,8 +338,6 @@ function zoomToHotspot(e) {
 		var spreadTransform = [scaleTransform, translateTransform, rotateTransform].join(' ');
 		$scene.css(cssTransformProperty, spreadTransform);
 	}
-
-	zoomedIn = !zoomedIn;
 }
 
 
