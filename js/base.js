@@ -140,6 +140,8 @@ function updateDrag(e) {
 		adjustedPer = Math.round(adjustedPer * 1000) / 1000;
 	}
 
+	console.log(adjustedPer)
+
 	var absPer = Math.abs(adjustedPer);
 
 	if ((curPageIndex == 0 && adjustedPer > 0) || (curPageIndex == 4 && adjustedPer < 0)) {
@@ -460,6 +462,11 @@ function craftThatPaperBaby() {
 		var pageTransform = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
 		$spread.css(cssTransformProperty, pageTransform);
 	});
+
+	// $('.spread').hide()
+	// $('.cover').show()
+	// $('.intro').show()
+
 }
 
 function hideLocationBar() {
