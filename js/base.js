@@ -28,6 +28,7 @@ var hasTouch              = Modernizr.touch,
 	curPer                = 0,
 	adjustedPer           = 0,
 	numTouches            = 0,
+	rate				  = 2.8,//the larger this is, the less visible the overlap bug is in chrome, but it skews the book - 2.8 is the smallest number without the bug
 	bgColors              = ['#3272ad', '#ae0039', '#50326d', '#355506', '#3272ad'],
 	$document             = $(document),
 	$window               = $(window),
@@ -191,7 +192,7 @@ function updateDrag(e) {
 		var rads         = degToRad(offsetAngle * anglePerPage + 10);
 		var tarX         = 5 * Math.cos(rads);
 		var tarZ         = 5 * Math.sin(rads);
-		var transform    = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
+		var transform    = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * rate) + 'deg)';
 		$(this).css(cssTransformProperty, transform);
 	});
 
@@ -459,7 +460,7 @@ function craftThatPaperBaby() {
 		var tarX          = 5 * Math.cos(rads);
 		var tarZ          = 5 * Math.sin(rads);
 		var $spread       = $(this);
-		var pageTransform = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * 0.5) + 'deg)';
+		var pageTransform = 'translateX(' + tarX.toFixed(3) + 'px) translateZ(' + tarZ.toFixed(3) + 'px) rotateY(' + (i * rate) + 'deg)';
 		$spread.css(cssTransformProperty, pageTransform);
 	});
 
